@@ -79,7 +79,6 @@ class Order {
         }else{//当前没有盈利空间的时候
 
         }
-        let order = null;
         switch (this.status) {
             case 'idle':
                 if(result){
@@ -89,7 +88,7 @@ class Order {
                 break;
             case 'sending':
                 if(this.orderList[0].status === 1){ //已发送
-                    order = this.ordersMap.get(parseInt(this.orderList[0].info.id));
+                    let order = this.ordersMap.get(parseInt(this.orderList[0].info.id));
                     if(order){
                         if (parseInt(order.status)===1){
                             this.orderList[0].status = 1 ;
@@ -107,15 +106,15 @@ class Order {
                             }else{
                                 //this.init();  //第一个订单被撤销后重新搬砖
                                 this.status = "bilateralEnd";
-                                this.event.emit('woker_end',this.index);
+                                this.event.emit('woker_end',this.index,0);
                                 return;
                             }
                         }
                     }
                 }
                 break;
-            case 'pending':
-                order = this.ordersMap.get(parseInt(this.orderList[0].info.id));
+            case 'pending':{
+                let order = this.ordersMap.get(parseInt(this.orderList[0].info.id));
                 if(order){
                     if (parseInt(order.status)===2){  //第一单成交部分 存数据库
                         this.orderList[0].status = 2;
@@ -131,7 +130,7 @@ class Order {
                             this.orderList[0].status = 3;
                             //this.init();  //第一个订单被撤销后重新搬砖
                             this.status = "bilateralEnd";
-                            this.event.emit('woker_end',this.index);
+                            this.event.emit('woker_end',this.index,0);
                             return;
                         }
                     }
@@ -177,7 +176,7 @@ class Order {
                         })
                     }
                 }
-
+            }
                 break;
             case 'bilateralSending':
                 if(this.orderList[1].status==null){
@@ -196,7 +195,7 @@ class Order {
                                 this.log.deal(order);
                                 this.status = "bilateralEnd";
                                 //this.init();
-                                this.event.emit('woker_end',this.index);
+                                this.event.emit('woker_end',this.index,1);
                             }else{ //第二个订单被撤销  重新发送
                                 this.ordersMap.delete(parseInt(this.orderList[1].info.id));
                                 this.bilateralLimitOrder();
@@ -205,20 +204,20 @@ class Order {
                     }
                 }
                 break;
-            case 'bilateralPending':
-                order = this.ordersMap.get(parseInt(this.orderList[1].info.id));
-                if(order){
-                    if (parseInt(order.status)===2){  //第二单成交部分 存数据库
+            case 'bilateralPending': {
+                let order = this.ordersMap.get(parseInt(this.orderList[1].info.id));
+                if (order) {
+                    if (parseInt(order.status) === 2) {  //第二单成交部分 存数据库
                         this.orderList[1].status = 2;
                         this.status = 'bilateralPending';
-                    }else if (parseInt(order.status)===3){
+                    } else if (parseInt(order.status) === 3) {
                         this.orderList[1].status = 3;
-                        if(order.info.deal_money!=='0'){ //搬砖结束 存数据库 重新开始
+                        if (order.info.deal_money !== '0') { //搬砖结束 存数据库 重新开始
                             this.log.deal(order);
                             this.status = "bilateralEnd";
                             //this.init();
-                            this.event.emit('woker_end',this.index);
-                        }else{ //第二个订单被撤销  重新发送
+                            this.event.emit('woker_end', this.index, 1);
+                        } else { //第二个订单被撤销  重新发送
                             this.status = "bilateralSending";
                             this.ordersMap.delete(parseInt(this.orderList[1].info.id));
                             this.bilateralLimitOrder();
@@ -227,87 +226,101 @@ class Order {
                 }
 
 
-                if(this.orderList[1].status === 1){
+                if (this.orderList[1].status === 1) {
                     let isCancel = false;
-                    if(this.orderList[1].arguments.type === 'buy'){
-                        if(this.orderList[1].arguments.market === 'A'){
-                            if(this.floatCompute(this.orderList[1].arguments.price,Object.keys(A_Depth.bids[0])[0])>=0){
+                    if (this.orderList[1].arguments.type === 'buy') {
+                        if (this.orderList[1].arguments.market === 'A') {
+                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(A_Depth.bids[0])[0]) >= 0) {
                                 isCancel = true;
                             }
-                        }else{
-                            if(this.floatCompute(this.orderList[1].arguments.price,Object.keys(B_Depth.bids[0])[0])>=0){
+                        } else {
+                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(B_Depth.bids[0])[0]) >= 0) {
                                 isCancel = true;
                             }
                         }
-                    }else{
-                        if(this.orderList[1].arguments.market === 'A'){
-                            if(this.floatCompute(this.orderList[1].arguments.price,Object.keys(A_Depth.asks[0])[0])>=0){
+                    } else {
+                        if (this.orderList[1].arguments.market === 'A') {
+                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(A_Depth.asks[0])[0]) >= 0) {
                                 isCancel = true;
                             }
-                        }else{
-                            if(this.floatCompute(this.orderList[1].arguments.price,Object.keys(B_Depth.asks[0])[0])>=0){
+                        } else {
+                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(B_Depth.asks[0])[0]) >= 0) {
                                 isCancel = true;
                             }
                         }
                     }
 
-                    if(result && isCancel===true){ //第二单的价格与市场深度1相差10个精确度单位  并且 深度1有盈利空间
+                    if (result && isCancel === true) { //第二单的价格与市场深度1相差10个精确度单位  并且 深度1有盈利空间
                         this.orderList[1].status = 0;
                         this.orderList[1].arguments.api.cancelOrder({
                             market: this.key,
                             id: this.orderList[1].info.id
-                        }).then(cancelOrderResult=>{
-                            if(!!cancelOrderResult){
-                                this.log.info("取消第二个订单成功"+this.orderList[1].info.id);
-                                this.log.http({arguments:this.orderList[1].arguments,msg:"取消第二个订单成功"+this.orderList[1].info.id});
+                        }).then(cancelOrderResult => {
+                            if (!!cancelOrderResult) {
+                                this.log.info("取消第二个订单成功" + this.orderList[1].info.id);
+                                this.log.http({
+                                    arguments: this.orderList[1].arguments,
+                                    msg: "取消第二个订单成功" + this.orderList[1].info.id
+                                });
                                 this.orderList[1].status = 3;
-                            }else{
+                            } else {
                                 this.orderList[1].status = 1;
-                                this.log.exception({arguments:this.orderList[1].arguments,msg:'取消第二个订单失败了'+this.orderList[1].info.id});
+                                this.log.exception({
+                                    arguments: this.orderList[1].arguments,
+                                    msg: '取消第二个订单失败了' + this.orderList[1].info.id
+                                });
                             }
                         })
-                    }else if(isCancel===true){ //第二单的价格与市场深度1相差10个精确度单位  并且 深度1无盈利空间  做止损
+                    } else if (isCancel === true) { //第二单的价格与市场深度1相差10个精确度单位  并且 深度1无盈利空间  做止损
                         this.status = "endAuto";
                     }
                 }
+            }
                 break;
-            case 'endAuto':
-                if(this.orderList[1].status==null){
+            case 'endAuto': {
+                if (this.orderList[1].status == null) {
                     this.bilateralLimitOrder();
                 }
 
                 let order = this.ordersMap.get(parseInt(this.orderList[1].info.id));
-                if(order){
+                if (order) {
                     // this.orderList[1].status = parseInt(order.status) ;
-                    if (parseInt(order.status)===3){
-                        if(order.info.deal_money!=='0'){
+                    if (parseInt(order.status) === 3) {
+                        if (order.info.deal_money !== '0') {
 
-                        }else{ //第二个订单被撤销  重新发送
+                        } else { //第二个订单被撤销  重新发送
                             this.ordersMap.delete(parseInt(this.orderList[1].info.id));
                             this.bilateralLimitOrder();
                         }
                     }
                 }
 
-                if(this.orderList[1].arguments.type === 'buy'){
-                    this.orderList[1].arguments.price = ((1-fee-rate)*this.orderList[0].arguments.price).toFixed(8);
-                }else{
-                    this.orderList[1].arguments.price = (this.orderList[0].arguments.price/(1-fee-rate)).toFixed(8);
+                if (this.orderList[1].arguments.type === 'buy') {
+                    this.orderList[1].arguments.price = ((1 - fee - rate) * this.orderList[0].arguments.price).toFixed(8);
+                } else {
+                    this.orderList[1].arguments.price = (this.orderList[0].arguments.price / (1 - fee - rate)).toFixed(8);
                 }
                 this.orderList[1].status = 0;
                 this.orderList[1].arguments.api.cancelOrder({
                     market: this.key,
                     id: this.orderList[1].info.id
-                }).then(cancelOrderResult=>{
-                    if(!!cancelOrderResult){
-                        this.log.info("取消第二个订单成功"+this.orderList[1].info.id);
-                        this.log.http({arguments:this.orderList[1].arguments,msg:"取消第二个订单成功"+this.orderList[1].info.id});
+                }).then(cancelOrderResult => {
+                    if (!!cancelOrderResult) {
+                        this.log.info("取消第二个订单成功" + this.orderList[1].info.id);
+                        this.log.http({
+                            arguments: this.orderList[1].arguments,
+                            msg: "取消第二个订单成功" + this.orderList[1].info.id
+                        });
                         this.orderList[1].status = 3;
-                    }else{
+                    } else {
                         this.orderList[1].status = 1;
-                        this.log.exception({arguments:this.orderList[1].arguments,msg:'取消第二个订单失败了'+this.orderList[1].info.id});
+                        this.log.exception({
+                            arguments: this.orderList[1].arguments,
+                            msg: '取消第二个订单失败了' + this.orderList[1].info.id
+                        });
                     }
                 });
+            }
                 break;
         }
     }
@@ -590,8 +603,8 @@ class Order {
                 this.orderList[0].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[0].arguments.type,
-                    price: this.orderList[0].arguments.price + "",
-                    amount: Math.min(this.orderList[0].arguments.num,1)+""
+                    price: parseFloat(this.orderList[0].arguments.price).toFixed(this.config.orderOptions[this.orderList[0].arguments.market+"Point"]),
+                    amount: this.config.orderOptions.amount//Math.min(this.orderList[0].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
                         this.event.emit('woker_start',this.index);
@@ -602,7 +615,7 @@ class Order {
                     }else{
                         //this.init(); //第一个订单发送失败  重新开始
                         this.status = "bilateralEnd";
-                        this.event.emit('woker_end',this.index);
+                        this.event.emit('woker_end',this.index,0);
                         this.log.exception({arguments:this.orderList[0].arguments,msg:"订单一发送失败"})
                     }
                 });
@@ -612,8 +625,8 @@ class Order {
                 this.orderList[1].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[1].arguments.type,
-                    price: this.orderList[1].arguments.price + "",
-                    amount: Math.min(this.orderList[1].arguments.num,1)+""
+                    price: this.config.orderOptions[this.orderList[1].arguments.market+"Point"],
+                    amount: this.config.orderOptions.amount//Math.min(this.orderList[1].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
                         this.orderList[1].status = 1;
@@ -631,8 +644,8 @@ class Order {
                 this.orderList[1].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[1].arguments.type,
-                    price: this.orderList[1].arguments.price + "",
-                    amount: Math.min(this.orderList[1].arguments.num,1)+""
+                    price:this.config.orderOptions[this.orderList[1].arguments.market+"Point"],
+                    amount: this.config.orderOptions.amount//Math.min(this.orderList[1].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
                         this.orderList[1].status = 1;
@@ -640,7 +653,7 @@ class Order {
                         this.log.http({arguments:this.orderList[1].arguments,msg:"订单二发送成功，结束自动"+this.orderList[1].info.id});
                         db.saveBilateral({id:this.bilaterId,orderB:''+this.orderList[1].info.id,profit:-1,charge:-1});
                         this.status = "bilateralEnd";
-                        this.event.emit('woker_end',this.index);
+                        this.event.emit('woker_end',this.index,2);
                     }else{
                         this.orderList[1].status = null;
                         //第二个订单发失败了  继续发

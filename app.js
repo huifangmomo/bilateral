@@ -103,13 +103,13 @@ function main() {
         }, 15000);
 
     });
-    event.on('woker_end',index => {
-        console.log('woker_end'+index);
+    event.on('woker_end',(index,type) => {
+        console.log('woker_end'+index+"_"+type);
         if(orderMap.get(index).timeoutObj){
             clearTimeout(orderMap.get(index).timeoutObj);
             orderMap.get(index).timeoutObj = null;
         }
-        if(orderMap.get(index).isOn===true){
+        if(orderMap.get(index).isOn===true && type==0){
             orderMap.get(index).init();
         }
     });

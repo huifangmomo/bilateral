@@ -6,7 +6,7 @@
 // const config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
 
 // const coinex = new CoinEx(null, config.A.AccessID, config.A.SecretKey);
-// const huobi = new HuoBi(null, config.B.AccessID, config.B.SecretKey,"5720120");
+// const huobi = new HuoBi(null, "a0abfc0b-55125de2-ed3f1aff-abedb", "f6041f13-29ceed20-c2bc80fd-02224","5720120");
 //
 // async function getInfo(){
 //     let A_B = await coinex.getOrderInfo({
@@ -19,20 +19,19 @@
 // }
 //
 // getInfo();
-
+// console.log(huobi)
 // huobi.limitOrder({
-//     market: "XRPUSDT",
+//     market: "NEO/BTC",
 //     type: "buy",
-//     price: 0.3672 + "",
-//     amount: 5+""
+//     price: 0.002020 + "",
+//     amount: 0.1+""
 // }).then(limitOrderResult=>{
 //     if(!!limitOrderResult){
 //         console.log(limitOrderResult);
 //         // this.status = "pending";
 //         // this.orderList[0].info = limitOrderResult.data;
 //     }else{
-//         this.init();
-//         //this.log.exception("limitOrderFail")
+//         console.log(limitOrderResult);
 //     }
 // });
 
@@ -85,4 +84,7 @@
 //     }
 // })
 
+let s = 0.000088
+//let len=s.split('.')[1].length;
+console.log(s.toFixed(5))
 

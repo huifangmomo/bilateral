@@ -6,8 +6,8 @@
     },
     "A": {
         "name":"huobi",
-        "AccessID":"7f845150-a4d6dbda-52342504-ee04c",
-        "SecretKey":"89d3b3be-df729245-ee72c823-590a1"
+        "AccessID":"a0abfc0b-55125de2-ed3f1aff-abedb",
+        "SecretKey":"f6041f13-29ceed20-c2bc80fd-02224"
     },
     "proxy":[
         "http://47.74.46.164:8888",
@@ -38,14 +38,17 @@
         "fromOffset":true
     },
     "orderOptions": {
-        "feeA": 0.0005,
-        "feeB": 0.00052,
+        "APoint": 6,
+        "BPoint": 8,
+        "feeA": 0.00052,
+        "feeB": 0.000195,
         "rate": 0.0,
         "normal": 1,
         "toA": 0,
         "toB": 0,
         "depthFix": 0.000001,
-        "largest": true
+        "largest": true,
+        "amount": 0.1
     }
 
 }
