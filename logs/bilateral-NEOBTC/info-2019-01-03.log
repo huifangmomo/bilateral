@@ -1,0 +1,126 @@
+[2019-01-03 11:11:40.193] [INFO] info - 当前状态: idle
+[2019-01-03 11:11:40.193] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:40.193] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:40.193] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:40.193] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:40.194] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"A挂买B挂卖"}
+[2019-01-03 11:11:40.253] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:40.253] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:40.253] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:40.253] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:40.253] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:40.253] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:40.502] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:40.502] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:40.502] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:40.502] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:40.502] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:40.502] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:41.085] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:41.085] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:41.085] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:41.085] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:41.085] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:41.085] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:41.286] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:41.287] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:41.287] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:41.287] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:41.287] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:41.287] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:41.348] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:41.348] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:41.348] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:41.348] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:41.348] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:41.348] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:42.181] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:42.181] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:42.181] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:42.181] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:42.181] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:42.181] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:43.197] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:43.197] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:43.198] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:43.198] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:43.198] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:43.198] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:43.260] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:43.260] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:43.260] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:43.260] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:43.260] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:43.261] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:43.323] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:43.323] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:43.323] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:43.324] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:43.324] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:43.324] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:44.073] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:44.073] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:44.073] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:44.073] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:44.073] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:44.074] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:44.188] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:44.188] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:44.188] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:44.188] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:44.188] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:44.188] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:44.248] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:44.248] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:44.249] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:44.249] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:44.249] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:44.249] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:44.470] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:44.470] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:44.470] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:44.470] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:44.470] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:44.470] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:45.056] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:45.056] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:45.057] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:45.057] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:45.057] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:45.057] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:45.155] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:45.155] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:45.155] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:45.155] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:45.156] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:45.156] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:45.214] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:45.214] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:45.214] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:45.214] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:45.214] [INFO] info - b0={"0.00203609":"18"}
+[2019-01-03 11:11:45.214] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203609","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:45.528] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:45.528] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:45.528] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:45.528] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:45.528] [INFO] info - b0={"0.00203606":"8.92703"}
+[2019-01-03 11:11:45.528] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203606","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:46.108] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:46.108] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:46.108] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:46.108] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:46.108] [INFO] info - b0={"0.00203606":"8.92703"}
+[2019-01-03 11:11:46.108] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203606","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:46.170] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:46.171] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:46.171] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:46.171] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:46.171] [INFO] info - b0={"0.00203606":"8.92703"}
+[2019-01-03 11:11:46.171] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203606","market":"B","num":18},"first":"A","msg":"B挂卖"}
+[2019-01-03 11:11:46.579] [INFO] info - 当前状态: sending
+[2019-01-03 11:11:46.579] [INFO] info - a0={"0.002032":"73.7704"}
+[2019-01-03 11:11:46.579] [INFO] info - a0={"0.002034":"0.1472"}
+[2019-01-03 11:11:46.579] [INFO] info - b0={"0.0020321":"6.41453"}
+[2019-01-03 11:11:46.579] [INFO] info - b0={"0.00203606":"8.92703"}
+[2019-01-03 11:11:46.579] [INFO] info - {"buy":{"type":"buy","price":"0.00203200","market":"A","num":18,"api":{"proxy":null,"AccessID":"7f845150-a4d6dbda-52342504-ee04c","SecretKey":"89d3b3be-df729245-ee72c823-590a1","AccountId":"5720120","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00203606","market":"B","num":18},"first":"A","msg":"B挂卖"}

@@ -1,0 +1,60 @@
+{
+    "appenders": [
+      {
+        "type": "console"
+      },
+      {
+        "type": "dateFile",
+        "filename": "./logs/${opts:name}/info",
+        "pattern": "-yyyy-MM-dd.log",
+        "absolute": true,
+        "layout": {
+          "type": "basic"
+        },
+        "alwaysIncludePattern": true,
+        "category": "info"
+      },
+      {
+        "type": "dateFile",
+        "filename": "./logs/${opts:name}/exception",
+        "pattern": "-yyyy-MM-dd.log",
+        "absolute": true,
+        "layout": {
+          "type": "basic"
+        },
+        "alwaysIncludePattern": true,
+        "category": "exception"
+      },
+      {
+        "type": "dateFile",
+        "filename": "./logs/${opts:name}/http",
+        "pattern": "-yyyy-MM-dd.log",
+        "absolute": true,
+        "layout": {
+          "type": "basic"
+        },
+        "alwaysIncludePattern": true,
+        "category": "http"
+      },
+      {
+        "type": "dateFile",
+        "filename": "./logs/${opts:name}/deal",
+        "pattern": "-yyyy-MM-dd.log",
+        "absolute": true,
+        "layout": {
+          "type": "basic"
+        },
+        "alwaysIncludePattern": true,
+        "category": "deal"
+      }
+    ],
+    "levels": {
+      "info": "DEBUG",
+      "exception": "DEBUG",
+      "http": "DEBUG",
+      "deal": "DEBUG"
+    },
+    "replaceConsole": true,
+    "lineDebug": true,
+    "rawMessage": true
+}

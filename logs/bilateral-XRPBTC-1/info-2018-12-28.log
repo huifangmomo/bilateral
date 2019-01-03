@@ -1,0 +1,287 @@
+[2018-12-28 10:28:12.779] [INFO] info - 当前状态: idle
+[2018-12-28 10:28:12.779] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:12.780] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:12.780] [INFO] info - huobibids0={"0.00009322":"110"}
+[2018-12-28 10:28:12.780] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:12.780] [INFO] info - 在B买A挂卖-0.00002153
+[2018-12-28 10:28:12.781] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"A挂买B挂卖"}
+[2018-12-28 10:28:12.787] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:12.787] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:12.787] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:12.787] [INFO] info - huobibids0={"0.00009322":"110"}
+[2018-12-28 10:28:12.787] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:12.787] [INFO] info - B卖-0.00001880
+[2018-12-28 10:28:12.787] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:13.503] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:13.503] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:13.503] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:13.504] [INFO] info - huobibids0={"0.00009322":"110"}
+[2018-12-28 10:28:13.504] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:13.504] [INFO] info - B卖-0.00001880
+[2018-12-28 10:28:13.504] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:13.619] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:13.619] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:13.619] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:13.619] [INFO] info - huobibids0={"0.00009322":"110"}
+[2018-12-28 10:28:13.619] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:13.619] [INFO] info - B卖-0.00001880
+[2018-12-28 10:28:13.619] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:13.620] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:13.620] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:13.620] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:13.620] [INFO] info - huobibids0={"0.00009322":"110"}
+[2018-12-28 10:28:13.620] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:13.620] [INFO] info - B卖-0.00001880
+[2018-12-28 10:28:13.620] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:14.269] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:14.270] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:14.270] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:14.270] [INFO] info - huobibids0={"0.00009322":"2261"}
+[2018-12-28 10:28:14.270] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:14.270] [INFO] info - B卖-0.00001880
+[2018-12-28 10:28:14.270] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:14.399] [INFO] info - 当前状态: idle
+[2018-12-28 10:28:14.399] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:14.399] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:14.399] [INFO] info - huobibids0={"0.00009322":"2261"}
+[2018-12-28 10:28:14.399] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:14.400] [INFO] info - 在B买A挂卖-0.00002153
+[2018-12-28 10:28:14.400] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"A挂买B挂卖"}
+[2018-12-28 10:28:15.583] [INFO] info - 当前状态: idle
+[2018-12-28 10:28:15.583] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:15.584] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:15.584] [INFO] info - huobibids0={"0.00009322":"110"}
+[2018-12-28 10:28:15.584] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:15.584] [INFO] info - 在B买A挂卖-0.00002153
+[2018-12-28 10:28:15.584] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"A挂买B挂卖"}
+[2018-12-28 10:28:15.713] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:15.713] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:15.713] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:15.713] [INFO] info - huobibids0={"0.00009322":"110"}
+[2018-12-28 10:28:15.713] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:15.713] [INFO] info - B卖-0.00001880
+[2018-12-28 10:28:15.713] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:16.357] [INFO] info - 当前状态: idle
+[2018-12-28 10:28:16.357] [INFO] info - coinexbids0={"0.00009304":"350"}
+[2018-12-28 10:28:16.357] [INFO] info - coinexasks0={"0.00009344":"475.7539414"}
+[2018-12-28 10:28:16.357] [INFO] info - huobibids0={"0.00009322":"2261"}
+[2018-12-28 10:28:16.357] [INFO] info - huobiasks0={"0.00009327":"537"}
+[2018-12-28 10:28:16.357] [INFO] info - 在B买A挂卖-0.00002153
+[2018-12-28 10:28:16.357] [INFO] info - {"buy":{"type":"buy","price":"0.00009305","market":"A","num":537},"sell":{"type":"sell","price":"0.00009326","market":"B","num":537},"get":0.00010566794448830605,"first":"A","msg":"A挂买B挂卖"}
+[2018-12-28 10:28:54.307] [INFO] info - 当前状态: idle
+[2018-12-28 10:28:54.307] [INFO] info - coinexbids0={"0.00009305":"350"}
+[2018-12-28 10:28:54.308] [INFO] info - coinexasks0={"0.00009347":"350"}
+[2018-12-28 10:28:54.308] [INFO] info - huobibids0={"0.00009323":"348"}
+[2018-12-28 10:28:54.308] [INFO] info - huobiasks0={"0.0000933":"4215"}
+[2018-12-28 10:28:54.309] [INFO] info - 在B买A挂卖-0.00001586
+[2018-12-28 10:28:54.309] [INFO] info - {"buy":{"type":"buy","price":"0.00009306","market":"A","num":4215},"sell":{"type":"sell","price":"0.00009329","market":"B","num":4215},"get":0.000534151999284126,"first":"A","msg":"A挂买B挂卖"}
+[2018-12-28 10:28:54.452] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:54.452] [INFO] info - coinexbids0={"0.00009305":"350"}
+[2018-12-28 10:28:54.452] [INFO] info - coinexasks0={"0.00009347":"350"}
+[2018-12-28 10:28:54.452] [INFO] info - huobibids0={"0.00009323":"348"}
+[2018-12-28 10:28:54.452] [INFO] info - huobiasks0={"0.0000933":"4215"}
+[2018-12-28 10:28:54.453] [INFO] info - B卖-0.00014769
+[2018-12-28 10:28:54.453] [INFO] info - {"buy":{"type":"buy","price":"0.00009306","market":"A","num":4215,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009329","market":"B","num":4215},"get":0.000534151999284126,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:54.453] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:54.453] [INFO] info - coinexbids0={"0.00009305":"350"}
+[2018-12-28 10:28:54.453] [INFO] info - coinexasks0={"0.00009347":"350"}
+[2018-12-28 10:28:54.454] [INFO] info - huobibids0={"0.00009323":"348"}
+[2018-12-28 10:28:54.454] [INFO] info - huobiasks0={"0.0000933":"4215"}
+[2018-12-28 10:28:54.454] [INFO] info - B卖-0.00014769
+[2018-12-28 10:28:54.454] [INFO] info - {"buy":{"type":"buy","price":"0.00009306","market":"A","num":4215,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009329","market":"B","num":4215},"get":0.000534151999284126,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:55.718] [INFO] info - 当前状态: idle
+[2018-12-28 10:28:55.718] [INFO] info - coinexbids0={"0.00009305":"350"}
+[2018-12-28 10:28:55.718] [INFO] info - coinexasks0={"0.00009347":"350"}
+[2018-12-28 10:28:55.718] [INFO] info - huobibids0={"0.00009323":"348"}
+[2018-12-28 10:28:55.718] [INFO] info - huobiasks0={"0.0000933":"4215"}
+[2018-12-28 10:28:55.718] [INFO] info - 在B买A挂卖-0.00001586
+[2018-12-28 10:28:55.718] [INFO] info - {"buy":{"type":"buy","price":"0.00009306","market":"A","num":4215},"sell":{"type":"sell","price":"0.00009329","market":"B","num":4215},"get":0.000534151999284126,"first":"A","msg":"A挂买B挂卖"}
+[2018-12-28 10:28:55.852] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:55.852] [INFO] info - coinexbids0={"0.00009305":"350"}
+[2018-12-28 10:28:55.852] [INFO] info - coinexasks0={"0.00009347":"350"}
+[2018-12-28 10:28:55.852] [INFO] info - huobibids0={"0.00009323":"348"}
+[2018-12-28 10:28:55.852] [INFO] info - huobiasks0={"0.0000933":"4215"}
+[2018-12-28 10:28:55.852] [INFO] info - B卖-0.00014769
+[2018-12-28 10:28:55.852] [INFO] info - {"buy":{"type":"buy","price":"0.00009306","market":"A","num":4215,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009329","market":"B","num":4215},"get":0.000534151999284126,"first":"A","msg":"B挂卖"}
+[2018-12-28 10:28:55.853] [INFO] info - 当前状态: sending
+[2018-12-28 10:28:55.853] [INFO] info - coinexbids0={"0.00009305":"350"}
+[2018-12-28 10:28:55.853] [INFO] info - coinexasks0={"0.00009347":"350"}
+[2018-12-28 10:28:55.853] [INFO] info - huobibids0={"0.00009323":"348"}
+[2018-12-28 10:28:55.853] [INFO] info - huobiasks0={"0.0000933":"4215"}
+[2018-12-28 10:28:55.853] [INFO] info - B卖-0.00014769
+[2018-12-28 10:28:55.853] [INFO] info - {"buy":{"type":"buy","price":"0.00009306","market":"A","num":4215,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"sell":{"type":"sell","price":"0.00009329","market":"B","num":4215},"get":0.000534151999284126,"first":"A","msg":"B挂卖"}
+[2018-12-28 17:05:30.573] [INFO] info - 当前状态: idle
+[2018-12-28 17:06:02.381] [INFO] info - 当前状态: idle
+[2018-12-28 17:06:02.382] [INFO] info - coinexbids0={"23.84756563":"0.146"}
+[2018-12-28 17:06:02.382] [INFO] info - coinexasks0={"7.9e-7":"4000"}
+[2018-12-28 17:06:02.382] [INFO] info - huobibids0={"0.0000957":"31"}
+[2018-12-28 17:06:02.382] [INFO] info - huobiasks0={"0.00009577":"2785"}
+[2018-12-28 17:07:42.650] [INFO] info - 当前状态: idle
+[2018-12-28 17:07:42.651] [INFO] info - coinexbids0={"23.84944191":"0.137"}
+[2018-12-28 17:07:42.651] [INFO] info - coinexasks0={"24.03067001":"0.02555227"}
+[2018-12-28 17:07:42.651] [INFO] info - huobibids0={"0.0000957":"3132"}
+[2018-12-28 17:07:42.651] [INFO] info - huobiasks0={"0.00009571":"169"}
+[2018-12-28 17:07:42.652] [INFO] info - {"buy":{"type":"buy","price":"0.00009571","market":"B","num":0.137},"sell":{"type":"sell","price":"23.84944191","market":"A","num":0.137},"get":497270.4508995507,"first":"A","msg":"在B买A卖"}
+[2018-12-28 17:07:43.215] [INFO] info - 当前状态: sending
+[2018-12-28 17:07:43.215] [INFO] info - coinexbids0={"23.84944191":"0.137"}
+[2018-12-28 17:07:43.215] [INFO] info - coinexasks0={"24.03067001":"0.02555227"}
+[2018-12-28 17:07:43.215] [INFO] info - huobibids0={"0.0000957":"9583"}
+[2018-12-28 17:07:43.215] [INFO] info - huobiasks0={"0.00009571":"169"}
+[2018-12-28 17:07:43.215] [INFO] info - {"buy":{"type":"buy","price":"0.00009571","market":"B","num":0.137},"sell":{"type":"sell","price":"23.84944191","market":"A","num":0.137,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"get":497270.4508995507,"first":"A","msg":"在B买"}
+[2018-12-28 17:07:45.079] [INFO] info - 当前状态: idle
+[2018-12-28 17:07:45.079] [INFO] info - coinexbids0={"23.84944191":"0.137"}
+[2018-12-28 17:07:45.079] [INFO] info - coinexasks0={"24.03067001":"0.02555227"}
+[2018-12-28 17:07:45.079] [INFO] info - huobibids0={"0.0000957":"9583"}
+[2018-12-28 17:07:45.079] [INFO] info - huobiasks0={"0.00009571":"169"}
+[2018-12-28 17:07:45.079] [INFO] info - {"buy":{"type":"buy","price":"0.00009571","market":"B","num":0.137},"sell":{"type":"sell","price":"23.84944191","market":"A","num":0.137},"get":497270.4508995507,"first":"A","msg":"在B买A卖"}
+[2018-12-28 17:07:45.080] [INFO] info - 当前状态: sending
+[2018-12-28 17:07:45.080] [INFO] info - coinexbids0={"23.84944191":"0.137"}
+[2018-12-28 17:07:45.080] [INFO] info - coinexasks0={"24.03067001":"0.02555227"}
+[2018-12-28 17:07:45.081] [INFO] info - huobibids0={"0.0000957":"9583"}
+[2018-12-28 17:07:45.081] [INFO] info - huobiasks0={"0.00009572":"31"}
+[2018-12-28 17:07:45.081] [INFO] info - {"buy":{"type":"buy","price":"0.00009572","market":"B","num":0.137},"sell":{"type":"sell","price":"23.84944191","market":"A","num":0.137,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"get":497218.5001629335,"first":"A","msg":"在B买"}
+[2018-12-28 17:07:45.081] [INFO] info - 当前状态: sending
+[2018-12-28 17:07:45.081] [INFO] info - coinexbids0={"23.84944191":"0.137"}
+[2018-12-28 17:07:45.081] [INFO] info - coinexasks0={"24.03067001":"0.02555227"}
+[2018-12-28 17:07:45.081] [INFO] info - huobibids0={"0.0000957":"9583"}
+[2018-12-28 17:07:45.081] [INFO] info - huobiasks0={"0.00009572":"31"}
+[2018-12-28 17:07:45.081] [INFO] info - {"buy":{"type":"buy","price":"0.00009572","market":"B","num":0.137},"sell":{"type":"sell","price":"23.84944191","market":"A","num":0.137,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"get":497218.5001629335,"first":"A","msg":"在B买"}
+[2018-12-28 17:07:45.277] [INFO] info - 当前状态: sending
+[2018-12-28 17:07:45.277] [INFO] info - coinexbids0={"23.84944191":"0.137"}
+[2018-12-28 17:07:45.277] [INFO] info - coinexasks0={"24.03067001":"0.02555227"}
+[2018-12-28 17:07:45.277] [INFO] info - huobibids0={"0.0000957":"9583"}
+[2018-12-28 17:07:45.277] [INFO] info - huobiasks0={"0.00009572":"31"}
+[2018-12-28 17:07:45.277] [INFO] info - {"buy":{"type":"buy","price":"0.00009572","market":"B","num":0.137},"sell":{"type":"sell","price":"23.84944191","market":"A","num":0.137,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"get":497218.5001629335,"first":"A","msg":"在B买"}
+[2018-12-28 17:07:46.380] [INFO] info - 当前状态: idle
+[2018-12-28 17:07:46.380] [INFO] info - coinexbids0={"23.84944191":"0.137"}
+[2018-12-28 17:07:46.380] [INFO] info - coinexasks0={"24.03067001":"0.02555227"}
+[2018-12-28 17:07:46.380] [INFO] info - huobibids0={"0.0000957":"9583"}
+[2018-12-28 17:07:46.380] [INFO] info - huobiasks0={"0.00009572":"31"}
+[2018-12-28 17:07:46.380] [INFO] info - {"buy":{"type":"buy","price":"0.00009572","market":"B","num":0.137},"sell":{"type":"sell","price":"23.84944191","market":"A","num":0.137},"get":497218.5001629335,"first":"A","msg":"在B买A卖"}
+[2018-12-28 17:17:48.345] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.346] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.346] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.346] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.346] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.347] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.347] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.347] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.347] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.348] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.348] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.348] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.348] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.348] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.484] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.484] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.484] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.484] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.484] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.484] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.484] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.484] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.485] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.485] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.485] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.485] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.485] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.485] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.485] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.485] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.485] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.485] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.485] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.485] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.485] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.485] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.486] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.486] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.486] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.486] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.486] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.486] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.486] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.486] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.486] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.486] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.486] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.486] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.486] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.821] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.822] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.822] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.822] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.822] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.822] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.822] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.822] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.822] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.822] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.822] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.823] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.823] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.823] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.823] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.823] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.823] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.823] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.823] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.823] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.823] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.823] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.823] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:48.823] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.824] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.824] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.824] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:48.824] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:48.824] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:48.825] [INFO] info - coinexbids0={"23.56440192":"0.13239421"}
+[2018-12-28 17:17:48.825] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:48.825] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:48.825] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:48.825] [INFO] info - {"buy":{"type":"buy","price":"0.00009551","market":"B","num":0.13239421},"sell":{"type":"sell","price":"23.56440192","market":"A","num":0.13239421},"get":492356.0826254005,"first":"A","msg":"在B买A卖"}
+[2018-12-28 17:17:49.089] [INFO] info - 当前状态: sending
+[2018-12-28 17:17:49.089] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:49.089] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:49.089] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:49.090] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:49.090] [INFO] info - {"buy":{"type":"buy","price":"0.00009551","market":"B","num":0.13239421},"sell":{"type":"sell","price":"23.56440192","market":"A","num":0.13239421,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"get":492356.0826254005,"first":"A","msg":"在B买"}
+[2018-12-28 17:17:49.248] [INFO] info - 当前状态: sending
+[2018-12-28 17:17:49.248] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:49.248] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:49.249] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:49.249] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:49.249] [INFO] info - {"buy":{"type":"buy","price":"0.00009551","market":"B","num":0.13239421},"sell":{"type":"sell","price":"23.56440192","market":"A","num":0.13239421,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"get":492356.0826254005,"first":"A","msg":"在B买"}
+[2018-12-28 17:17:49.249] [INFO] info - 当前状态: sending
+[2018-12-28 17:17:49.249] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:49.249] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:49.250] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:49.250] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:49.250] [INFO] info - {"buy":{"type":"buy","price":"0.00009551","market":"B","num":0.13239421},"sell":{"type":"sell","price":"23.56440192","market":"A","num":0.13239421,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"get":492356.0826254005,"first":"A","msg":"在B买"}
+[2018-12-28 17:17:49.875] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:49.875] [INFO] info - coinexbids0={"23.56440193":"0.25"}
+[2018-12-28 17:17:49.875] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:49.875] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:49.875] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:49.875] [INFO] info - {"buy":{"type":"buy","price":"0.00009551","market":"B","num":0.25},"sell":{"type":"sell","price":"23.56440193","market":"A","num":0.25},"get":492356.0828343419,"first":"A","msg":"在B买A卖"}
+[2018-12-28 17:17:50.171] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:50.171] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:50.171] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:50.171] [INFO] info - huobibids0={"0.0000955":"3"}
+[2018-12-28 17:17:50.171] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:50.172] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:50.172] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:50.308] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:50.308] [INFO] info - coinexbids0={"0.00009529":"350"}
+[2018-12-28 17:17:50.308] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:50.308] [INFO] info - huobibids0={"0.00009549":"1165"}
+[2018-12-28 17:17:50.308] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:50.308] [INFO] info - 在B买A挂卖-0.00002465
+[2018-12-28 17:17:50.308] [INFO] info - A挂买B挂卖-0.00002348
+[2018-12-28 17:17:50.877] [INFO] info - 当前状态: idle
+[2018-12-28 17:17:50.877] [INFO] info - coinexbids0={"23.5644944":"0.13239421"}
+[2018-12-28 17:17:50.877] [INFO] info - coinexasks0={"0.00009566":"350"}
+[2018-12-28 17:17:50.877] [INFO] info - huobibids0={"0.00009549":"1165"}
+[2018-12-28 17:17:50.877] [INFO] info - huobiasks0={"0.00009551":"2325"}
+[2018-12-28 17:17:50.877] [INFO] info - {"buy":{"type":"buy","price":"0.00009551","market":"B","num":0.13239421},"sell":{"type":"sell","price":"23.56449440","market":"A","num":0.13239421},"get":492358.0149161345,"first":"A","msg":"在B买A卖"}

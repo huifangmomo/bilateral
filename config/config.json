@@ -1,0 +1,51 @@
+{
+    "B": {
+        "name":"okex",
+        "AccessID":"9197e2ce-d0d0-46ef-af7c-c7044f344d08",
+        "SecretKey":"7C78193247421C524C5126502D606585"
+    },
+    "A": {
+        "name":"huobi",
+        "AccessID":"7f845150-a4d6dbda-52342504-ee04c",
+        "SecretKey":"89d3b3be-df729245-ee72c823-590a1"
+    },
+    "proxy":[
+        "http://47.74.46.164:8888",
+        "http://47.74.11.193:8888",
+        "http://47.74.43.180:8888",
+        "http://47.74.38.224:8888",
+        "http://47.74.23.91:8888",
+        "http://47.74.43.248:8888",
+        "http://47.74.27.109:8888",
+        "http://47.74.9.218:8888"
+    ],
+    "KafkaClient":{
+        "kafkaHost": "47.74.17.207:9092",
+        "sasl":{
+            "mechanism": "plain",
+            "username": "consumer",
+            "password": "consumer-pass"
+        }
+    },
+    "topics": [
+        { "topic": "order_okex_17", "partition": 0 },
+        { "topic": "order_huobi_14", "partition": 0 }
+    ],
+    "options": {
+        "autoCommit": true,
+        "fetchMaxWaitMs": 1000,
+        "fetchMaxBytes": 1048576 ,
+        "fromOffset":true
+    },
+    "orderOptions": {
+        "feeA": 0.0005,
+        "feeB": 0.00052,
+        "rate": 0.0,
+        "normal": 1,
+        "toA": 0,
+        "toB": 0,
+        "depthFix": 0.000001,
+        "largest": true
+    }
+
+}

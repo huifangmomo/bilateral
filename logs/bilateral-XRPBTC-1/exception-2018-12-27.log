@@ -1,0 +1,5 @@
+[2018-12-27 15:11:06.156] [ERROR] exception - {"arguments":{"type":"buy","price":"0.00009636","market":"A","num":65,"api":{"proxy":null,"AccessID":"8E3AB6396B5246BBA7F39F1FB467E2EB","SecretKey":"BC025BC0D90A45969D03F02F5925C37D78524E1FA387FEA2","networkqueue":{"concurrency":10,"every":1000,"maxTasks":null,"_queue":[],"_done":true}}},"msg":"订单一发送失败"}
+[2018-12-27 15:44:38.523] [ERROR] exception - {"msg":"订单一发送失败"}
+[2018-12-27 15:44:40.081] [ERROR] exception - {"msg":"订单一发送失败"}
+[2018-12-27 15:57:09.497] [ERROR] exception - {"msg":"订单一发送失败"}
+[2018-12-27 15:57:12.886] [ERROR] exception - {"msg":"订单一发送失败"}
