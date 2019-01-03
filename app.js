@@ -12,6 +12,8 @@ const tradeString = params[0] +'/'+ params[1];
 
 const config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
 
+let balances = config.balance;
+
 function main() {
     let event = new EventEmitter();
 
@@ -80,12 +82,44 @@ function main() {
         }
 
     });
-    event.on('order_update', (orderStatus,orderInfo) => {
+    event.on('order_update', (orderStatus,orderInfo,topic) => {
         if(!orderInfo){
+            return;
+        }
+        if(orderInfo.market.toUpperCase() != (params[0]+params[1])){
             return;
         }
         for (let [key, value] of orderMap) {
             if(value.isOn===true){
+                if(parseInt(orderStatus)===1){
+                    let market = "A";
+                    if(topic===config.B.name){
+                        market = "B";
+                    }
+                    balances[market][0] -= parseFloat(orderInfo.amount);
+                    balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+                }else if(parseInt(orderStatus)===3 ){
+                    if((orderInfo.deal_money === 0 || orderInfo.deal_money === '0')){
+                        let market = "A";
+                        if(topic===config.B.name){
+                            market = "B";
+                        }
+                        balances[market][0] += parseFloat(orderInfo.amount);
+                        balances[market][1] += parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+                    }else {
+                        let market = "A";
+                        let p = 1;
+                        if(topic===config.B.name){
+                            market = "B";
+                        }
+                        if(parseInt(orderInfo.side)===1){ //卖出
+                            p = -1;
+                        }
+                        balances[market][0] += parseFloat(orderInfo.amount)*p;
+                        balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount)*p;
+                    }
+
+                }
                 value.order_update(orderStatus,orderInfo)
             }
         }
@@ -109,8 +143,15 @@ function main() {
             clearTimeout(orderMap.get(index).timeoutObj);
             orderMap.get(index).timeoutObj = null;
         }
-        if(orderMap.get(index).isOn===true && type==0){
-            orderMap.get(index).init();
+        if(orderMap.get(index).isOn===true){
+            if(balances.A[0]>config.orderOptions.amount &&
+                balances.B[0]>config.orderOptions.amount &&
+                balances.A[1]>config.orderOptions.amount*0.003 &&
+                balances.B[1]>config.orderOptions.amount*0.003){
+                orderMap.get(index).init();
+            }else{
+                orderMap.get(index).isOn = false;
+            }
         }
     });
 

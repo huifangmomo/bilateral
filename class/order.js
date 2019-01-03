@@ -300,26 +300,28 @@ class Order {
                 } else {
                     this.orderList[1].arguments.price = (this.orderList[0].arguments.price / (1 - fee - rate)).toFixed(8);
                 }
-                this.orderList[1].status = 0;
-                this.orderList[1].arguments.api.cancelOrder({
-                    market: this.key,
-                    id: this.orderList[1].info.id
-                }).then(cancelOrderResult => {
-                    if (!!cancelOrderResult) {
-                        this.log.info("取消第二个订单成功" + this.orderList[1].info.id);
-                        this.log.http({
-                            arguments: this.orderList[1].arguments,
-                            msg: "取消第二个订单成功" + this.orderList[1].info.id
-                        });
-                        this.orderList[1].status = 3;
-                    } else {
-                        this.orderList[1].status = 1;
-                        this.log.exception({
-                            arguments: this.orderList[1].arguments,
-                            msg: '取消第二个订单失败了' + this.orderList[1].info.id
-                        });
-                    }
-                });
+                if(this.orderList[1].status === 1){
+                    this.orderList[1].status = 0;
+                    this.orderList[1].arguments.api.cancelOrder({
+                        market: this.key,
+                        id: this.orderList[1].info.id
+                    }).then(cancelOrderResult => {
+                        if (!!cancelOrderResult) {
+                            this.log.info("取消第二个订单成功" + this.orderList[1].info.id);
+                            this.log.http({
+                                arguments: this.orderList[1].arguments,
+                                msg: "取消第二个订单成功" + this.orderList[1].info.id
+                            });
+                            this.orderList[1].status = 3;
+                        } else {
+                            this.orderList[1].status = 1;
+                            this.log.exception({
+                                arguments: this.orderList[1].arguments,
+                                msg: '取消第二个订单失败了' + this.orderList[1].info.id
+                            });
+                        }
+                    });
+                }
             }
                 break;
         }
@@ -534,7 +536,10 @@ class Order {
         this.log.info("===============order_update"+orderStatus+"===============");
         this.log.info(orderInfo);
         this.log.info("===========================================");
-        if(orderInfo.market.toUpperCase() == this.key){
+        if(orderInfo.deal_money === 0){
+            orderInfo.deal_money = '0';
+        }
+        if(orderInfo.market.toUpperCase() == this.key.replace("/","")){
             this.ordersMap.set(parseInt(orderInfo.id),{status:orderStatus,info:orderInfo});
             let type = ['','sell','buy'];
             if(!!this.orderList[0].info){
@@ -562,6 +567,11 @@ class Order {
                 if(parseInt(orderInfo.id)===parseInt(this.orderList[1].info.id)){
                     if(parseInt(orderStatus) === 1 || parseInt(orderStatus) === 2){
                         db.updateBilateral({id:this.bilaterId,orderB:'' + orderInfo.id});
+                        if(parseInt(orderInfo.side)==1){
+                            db.updateSellPrice({id:this.bilaterId,sellPrice:''+orderInfo.price});
+                        }else{
+                            db.updateBuyPrice({id:this.bilaterId,buyPrice:''+orderInfo.price});
+                        }
                     }
                     if(parseInt(orderStatus)===3 && orderInfo.deal_money ==='0') {
                         db.updateBilateral({id:this.bilaterId,orderB:''});
@@ -625,7 +635,7 @@ class Order {
                 this.orderList[1].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[1].arguments.type,
-                    price: this.config.orderOptions[this.orderList[1].arguments.market+"Point"],
+                    price: parseFloat(this.orderList[1].arguments.price).toFixed(this.config.orderOptions[this.orderList[1].arguments.market+"Point"]),
                     amount: this.config.orderOptions.amount//Math.min(this.orderList[1].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
@@ -644,7 +654,7 @@ class Order {
                 this.orderList[1].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[1].arguments.type,
-                    price:this.config.orderOptions[this.orderList[1].arguments.market+"Point"],
+                    price:parseFloat(this.orderList[1].arguments.price).toFixed(this.config.orderOptions[this.orderList[1].arguments.market+"Point"]),
                     amount: this.config.orderOptions.amount//Math.min(this.orderList[1].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){

@@ -75,7 +75,7 @@ class ComConsumer {
 
                 let orderStatus = JSON.parse(message.value).orderStatus
                 let orderInfo = JSON.parse(message.value).orderInfo
-                this.event.emit('order_update',orderStatus,orderInfo)
+                this.event.emit('order_update',orderStatus,orderInfo,message.topic.split('_')[1])
 
             }
 

@@ -53,11 +53,11 @@
 
 // function profitCompute(buyPrice,sellPrice,num){
 //     const profit = (parseFloat(sellPrice)-parseFloat(buyPrice))*num;
-//     const charge =  num*(0.0004+0.00052)*parseFloat(sellPrice);
+//     const charge =  num*(0.00052+0.000195)*parseFloat(sellPrice);
 //     return {profit:profit,charge:charge}
 // }
 //
-// var data = (profitCompute(0.00009521,0.00009543,1));
+// var data = (profitCompute(0.00200357,0.002005,0.1));
 // console.log(data.profit.toFixed(8));
 // console.log(data.charge.toFixed(8));
 
@@ -84,7 +84,9 @@
 //     }
 // })
 
-let s = 0.000088
-//let len=s.split('.')[1].length;
-console.log(s.toFixed(5))
+// let s = 0.000088
+// //let len=s.split('.')[1].length;
+// console.log(s.toFixed(5))
+
+
 
