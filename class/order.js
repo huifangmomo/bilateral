@@ -333,7 +333,7 @@ class Order {
         depthFix = this.config.orderOptions.depthFix;
         let m = parseFloat(a)*100000000;
         let n = parseFloat(b)*100000000;
-        let result = Math.abs(m-n)-depthFix*100000000*5;
+        let result = Math.abs(m-n)-depthFix*100000000*10;
         return result;
     }
 
@@ -620,7 +620,6 @@ class Order {
                     amount: this.config.orderOptions.amount//Math.min(this.orderList[0].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
-                        this.event.emit('woker_start',this.index);
                         this.orderList[0].status = 1;
                         this.orderList[0].info = limitOrderResult.data;
                         this.log.info("订单一发送成功"+this.orderList[0].info.id);
@@ -642,6 +641,7 @@ class Order {
                     amount: this.config.orderOptions.amount//Math.min(this.orderList[1].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
+                        this.event.emit('woker_start',this.index);
                         this.orderList[1].status = 1;
                         this.orderList[1].info = limitOrderResult.data;
                         this.log.http({arguments:this.orderList[1].arguments,msg:"订单二发送成功"+this.orderList[1].info.id});

@@ -91,41 +91,41 @@ function main() {
         }
         for (let [key, value] of orderMap) {
             if(value.isOn===true){
-                if(parseInt(orderStatus)===1){
-                    let market = "A";
-                    if(topic===config.B.name){
-                        market = "B";
-                    }
-                    balances[market][0] -= parseFloat(orderInfo.amount);
-                    balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
-                }else if(parseInt(orderStatus)===3 ){
-                    if((orderInfo.deal_money === 0 || orderInfo.deal_money === '0')){
-                        let market = "A";
-                        if(topic===config.B.name){
-                            market = "B";
-                        }
-                        balances[market][0] += parseFloat(orderInfo.amount);
-                        balances[market][1] += parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
-                    }else {
-                        let market = "A";
-                        let p = 1;
-                        if(topic===config.B.name){
-                            market = "B";
-                        }
-                        if(parseInt(orderInfo.side)===1){ //卖出
-                            p = -1;
-                        }
-                        balances[market][0] += parseFloat(orderInfo.amount)*p;
-                        balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount)*p;
-                    }
-
-                }
-                value.log.info('==========balances==========');
-                value.log.info(balances);
-                value.log.info('==========balances==========');
                 value.order_update(orderStatus,orderInfo)
             }
         }
+        if(parseInt(orderStatus)===1){
+            let market = "A";
+            if(topic===config.B.name){
+                market = "B";
+            }
+            balances[market][0] -= parseFloat(orderInfo.amount);
+            balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+        }else if(parseInt(orderStatus)===3 ){
+            if((orderInfo.deal_money === 0 || orderInfo.deal_money === '0')){
+                let market = "A";
+                if(topic===config.B.name){
+                    market = "B";
+                }
+                balances[market][0] += parseFloat(orderInfo.amount);
+                balances[market][1] += parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+            }else {
+                let market = "A";
+                let p = 1;
+                if(topic===config.B.name){
+                    market = "B";
+                }
+                if(parseInt(orderInfo.side)===1){ //卖出
+                    p = -1;
+                }
+                balances[market][0] += parseFloat(orderInfo.amount)*p;
+                balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount)*p;
+            }
+
+        }
+        orderMap.get(0).log.info('==========balances==========');
+        orderMap.get(0).log.info(balances);
+        orderMap.get(0).log.info('==========balances==========');
     });
     event.on('woker_start',index => {
         console.log('woker_start'+index);
