@@ -38,8 +38,8 @@
         "fromOffset":true
     },
     "balance": {
-        "A": [1,0.00277993],
-        "B": [1.09900,0.00497540]
+        "A": [0.2864,0.00420733],
+        "B": [1.20900,0.004]
     },
     "orderOptions": {
         "APoint": 6,
@@ -47,12 +47,12 @@
         "feeA": 0.00052,
         "feeB": 0.000195,
         "rate": 0.0,
-        "normal": 1,
-        "toA": 0,
-        "toB": 0,
+        "normal": 0,
+        "toA": 3,
+        "toB": 3,
         "depthFix": 0.000001,
         "largest": true,
-        "amount": 0.1
+        "amount": 0.01
     }
 
 }

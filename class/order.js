@@ -7,7 +7,6 @@ const ALL_STATUS = ['idle', 'sending', 'pending','bilateralSending', 'bilateralP
 
 let fee = 0;
 let rate = 0;  //已乘2倍
-let depthFix = 0;
 
 class Order {
 
@@ -26,7 +25,6 @@ class Order {
 
         fee = config.orderOptions.feeA + config.orderOptions.feeB;
         rate = config.orderOptions.rate*2;
-        depthFix = config.orderOptions.depthFix;
         this.bilaterType = bilaterType;  //0策略搬  1搬到A，就是A买  2搬到B，就是B买
         this.init();
     }
@@ -41,7 +39,7 @@ class Order {
     }
 
     check(A_Depth,B_Depth,api_A,api_B){
-        this.log.info("当前状态: "+this.status);
+        this.log.info("worker"+this.index+"当前状态: "+this.status);
         this.log.info("a0="+JSON.stringify(A_Depth.bids[0]));
         this.log.info("a0="+JSON.stringify(A_Depth.asks[0]));
         this.log.info("b0="+JSON.stringify(B_Depth.bids[0]));
@@ -138,23 +136,25 @@ class Order {
 
                 if(this.orderList[0].status === 1){
                     let isCancel = false;
+                    let point = this.config.orderOptions[this.orderList[0].arguments.market+"Point"];
+                    let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
                     if(this.orderList[0].arguments.type === 'buy'){
                         if(this.orderList[0].arguments.market === 'A'){
-                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.bids[0])[0])>=0){
+                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.bids[0])[0],depthFix)>=0){
                                 isCancel = true;
                             }
                         }else{
-                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.bids[0])[0])>=0){
+                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.bids[0])[0],depthFix)>=0){
                                 isCancel = true;
                             }
                         }
                     }else{
                         if(this.orderList[0].arguments.market === 'A'){
-                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.asks[0])[0])>=0){
+                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.asks[0])[0],depthFix)>=0){
                                 isCancel = true;
                             }
                         }else{
-                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.asks[0])[0])>=0){
+                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.asks[0])[0],depthFix)>=0){
                                 isCancel = true;
                             }
                         }
@@ -228,23 +228,25 @@ class Order {
 
                 if (this.orderList[1].status === 1) {
                     let isCancel = false;
+                    let point = this.config.orderOptions[this.orderList[1].arguments.market+"Point"];
+                    let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
                     if (this.orderList[1].arguments.type === 'buy') {
                         if (this.orderList[1].arguments.market === 'A') {
-                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(A_Depth.bids[0])[0]) >= 0) {
+                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(A_Depth.bids[0])[0],depthFix) >= 0) {
                                 isCancel = true;
                             }
                         } else {
-                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(B_Depth.bids[0])[0]) >= 0) {
+                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(B_Depth.bids[0])[0],depthFix) >= 0) {
                                 isCancel = true;
                             }
                         }
                     } else {
                         if (this.orderList[1].arguments.market === 'A') {
-                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(A_Depth.asks[0])[0]) >= 0) {
+                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(A_Depth.asks[0])[0],depthFix) >= 0) {
                                 isCancel = true;
                             }
                         } else {
-                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(B_Depth.asks[0])[0]) >= 0) {
+                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(B_Depth.asks[0])[0],depthFix) >= 0) {
                                 isCancel = true;
                             }
                         }
@@ -327,10 +329,11 @@ class Order {
         }
     }
 
-    floatCompute(a,b){
+    floatCompute(a,b,depthFix){
+        depthFix = this.config.orderOptions.depthFix;
         let m = parseFloat(a)*100000000;
         let n = parseFloat(b)*100000000;
-        let result = Math.abs(m-n)-depthFix*100000000*10;
+        let result = Math.abs(m-n)-depthFix*100000000*5;
         return result;
     }
 
@@ -533,9 +536,9 @@ class Order {
     }
 
     order_update(orderStatus,orderInfo){
-        this.log.info("===============order_update"+orderStatus+"===============");
+        this.log.info("===============worker"+this.index+"order_update"+orderStatus+"===============");
         this.log.info(orderInfo);
-        this.log.info("===========================================");
+        this.log.info("==================================================");
         if(orderInfo.deal_money === 0){
             orderInfo.deal_money = '0';
         }

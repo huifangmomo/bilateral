@@ -120,6 +120,9 @@ function main() {
                     }
 
                 }
+                value.log.info('==========balances==========');
+                value.log.info(balances);
+                value.log.info('==========balances==========');
                 value.order_update(orderStatus,orderInfo)
             }
         }
@@ -130,7 +133,7 @@ function main() {
             for (let [key, value] of orderMap) {
                 if(value.isOn===false && value.bilaterType === orderMap.get(index).bilaterType ){
                     value.isOn = true;
-                    console.log("==============worker"+key);
+                    value.log.info("==============worker"+key);
                     break;
                 }
             }
@@ -138,24 +141,61 @@ function main() {
 
     });
     event.on('woker_end',(index,type) => {
-        console.log('woker_end'+index+"_"+type);
+        orderMap.get(index).log.info('woker_end'+index+"_"+type);
         if(orderMap.get(index).timeoutObj){
             clearTimeout(orderMap.get(index).timeoutObj);
             orderMap.get(index).timeoutObj = null;
         }
-        if(orderMap.get(index).isOn===true){
-            if(balances.A[0]>config.orderOptions.amount &&
+
+        if(balances.A[0]>config.orderOptions.amount &&
                 balances.B[0]>config.orderOptions.amount &&
                 balances.A[1]>config.orderOptions.amount*0.003 &&
-                balances.B[1]>config.orderOptions.amount*0.003){
+                balances.B[1]>config.orderOptions.amount*0.003) { //两边都能搬
+            orderMap.get(index).init();
+        }else if(balances.A[1]>config.orderOptions.amount*0.003 && balances.B[0]>config.orderOptions.amount){ //能搬到A
+            if(orderMap.get(index).bilaterType===1){
                 orderMap.get(index).init();
             }else{
-                orderMap.get(index).isOn = false;
+                if(isOver(orderMap,1)===true){//目前没有搬到A的worker
+                    for (let [key, value] of orderMap) {
+                        if(value.isOn===false && value.bilaterType === 1 ){
+                            value.isOn = true;
+                            value.log.info("==============worker"+key);
+                            break;
+                        }
+                    }
+                }
             }
+        }else if(balances.B[1]>config.orderOptions.amount*0.003 && balances.A[0]>config.orderOptions.amount){ //能搬到B
+            if(orderMap.get(index).bilaterType===2){
+                orderMap.get(index).init();
+            }else{
+                if(isOver(orderMap,2)===true){ //目前没有搬到B的worker
+                    for (let [key, value] of orderMap) {
+                        if(value.isOn===false && value.bilaterType === 2 ){
+                            value.isOn = true;
+                            value.log.info("==============worker"+key);
+                            break;
+                        }
+                    }
+                }
+            }
+        }else{ //都不能搬了
+            orderMap.get(index).isOn = false;
         }
     });
 
 }
+
+function isOver(orderMap,type){
+    for (let [key, value] of orderMap) {
+        if(value.isOn===true && value.bilaterType===type){
+            return false;
+        }
+    }
+    return true;
+}
+
 
 //全局异常
 process.on('uncaughtException', function (err) {

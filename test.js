@@ -88,5 +88,5 @@
 // //let len=s.split('.')[1].length;
 // console.log(s.toFixed(5))
 
-
+console.log(Math.pow(0.1,8).toFixed(8));
 
