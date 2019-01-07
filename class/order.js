@@ -135,31 +135,28 @@ class Order {
                 }
 
                 if(this.orderList[0].status === 1){
-                    let isCancel = false;
+                    let differ = 0;
+                    let depthIndex = 0;
                     let point = this.config.orderOptions[this.orderList[0].arguments.market+"Point"];
                     let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
                     if(this.orderList[0].arguments.type === 'buy'){
                         if(this.orderList[0].arguments.market === 'A'){
-                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.bids[0])[0],depthFix)>=0){
-                                isCancel = true;
-                            }
+                            differ = this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.bids[0])[0],depthFix);
+                            depthIndex = this.depthCompute(A_Depth.bids,this.orderList[0].arguments.price);
                         }else{
-                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.bids[0])[0],depthFix)>=0){
-                                isCancel = true;
-                            }
+                            differ = this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.bids[0])[0],depthFix);
+                            depthIndex = this.depthCompute(B_Depth.bids,this.orderList[0].arguments.price);
                         }
                     }else{
                         if(this.orderList[0].arguments.market === 'A'){
-                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.asks[0])[0],depthFix)>=0){
-                                isCancel = true;
-                            }
+                            differ = this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.asks[0])[0],depthFix);
+                            depthIndex = this.depthCompute(A_Depth.asks,this.orderList[0].arguments.price);
                         }else{
-                            if(this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.asks[0])[0],depthFix)>=0){
-                                isCancel = true;
-                            }
+                            differ = this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.asks[0])[0],depthFix);
+                            depthIndex = this.depthCompute(B_Depth.asks,this.orderList[0].arguments.price);
                         }
-                    } //第一单的价格与市场深度1相差10个精确度单位
-                    if(!result || isCancel===true){
+                    }
+                    if(!result || differ > 5 || depthIndex > 3){//没有盈利空间或者第一单的价格与市场深度1相差5个精确度单位或者深度在4以后
                         this.orderList[0].status = 0;
                         this.orderList[0].arguments.api.cancelOrder({
                             market: this.key,
@@ -225,34 +222,34 @@ class Order {
                     }
                 }
 
-
+                this.log.info("订单二状态"+this.orderList[1].status);
                 if (this.orderList[1].status === 1) {
-                    let isCancel = false;
+                    let differ = 0;
+                    let depthIndex = 0;
                     let point = this.config.orderOptions[this.orderList[1].arguments.market+"Point"];
                     let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
                     if (this.orderList[1].arguments.type === 'buy') {
                         if (this.orderList[1].arguments.market === 'A') {
-                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(A_Depth.bids[0])[0],depthFix) >= 0) {
-                                isCancel = true;
-                            }
+                            differ = this.floatCompute(this.orderList[1].arguments.price,Object.keys(A_Depth.bids[0])[0],depthFix);
+                            depthIndex = this.depthCompute(A_Depth.bids,this.orderList[1].arguments.price);
                         } else {
-                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(B_Depth.bids[0])[0],depthFix) >= 0) {
-                                isCancel = true;
-                            }
+                            differ = this.floatCompute(this.orderList[1].arguments.price,Object.keys(B_Depth.bids[0])[0],depthFix);
+                            depthIndex = this.depthCompute(B_Depth.bids,this.orderList[1].arguments.price);
                         }
                     } else {
                         if (this.orderList[1].arguments.market === 'A') {
-                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(A_Depth.asks[0])[0],depthFix) >= 0) {
-                                isCancel = true;
-                            }
+                            differ = this.floatCompute(this.orderList[1].arguments.price,Object.keys(A_Depth.asks[0])[0],depthFix);
+                            depthIndex = this.depthCompute(A_Depth.asks,this.orderList[1].arguments.price);
                         } else {
-                            if (this.floatCompute(this.orderList[1].arguments.price, Object.keys(B_Depth.asks[0])[0],depthFix) >= 0) {
-                                isCancel = true;
-                            }
+                            differ = this.floatCompute(this.orderList[1].arguments.price,Object.keys(B_Depth.asks[0])[0],depthFix);
+                            depthIndex = this.depthCompute(B_Depth.asks,this.orderList[1].arguments.price);
                         }
                     }
 
-                    if (result && isCancel === true) { //第二单的价格与市场深度1相差10个精确度单位  并且 深度1有盈利空间
+                    this.log.info("订单二精度差"+differ);
+                    this.log.info("订单二深度"+depthIndex);
+
+                    if (result && (differ > 5|| depthIndex>3) ) { //第二单的价格与市场深度1相差5个精确度单位或者在深度4之后  并且 深度1有盈利空间
                         this.orderList[1].status = 0;
                         this.orderList[1].arguments.api.cancelOrder({
                             market: this.key,
@@ -273,7 +270,7 @@ class Order {
                                 });
                             }
                         })
-                    } else if (isCancel === true) { //第二单的价格与市场深度1相差10个精确度单位  并且 深度1无盈利空间  做止损
+                    } else if (!result && depthIndex>9) { //第二单的价格在深度9以后  并且 深度1无盈利空间  做止损
                         this.status = "endAuto";
                     }
                 }
@@ -329,12 +326,20 @@ class Order {
         }
     }
 
-    floatCompute(a,b,depthFix){
+    floatCompute(a,b,depthFix){ //返回的值为相差的精度
         depthFix = this.config.orderOptions.depthFix;
         let m = parseFloat(a)*100000000;
         let n = parseFloat(b)*100000000;
-        let result = Math.abs(m-n)-depthFix*100000000*10;
+        let result = Math.abs(m-n)/depthFix*100000000 ;//Math.abs(m-n)-depthFix*100000000*10;
         return result;
+    }
+
+    depthCompute(depth,price){ //返回的值price的深度
+        for(let i=0;i<depth.length;i++){
+            if(parseFloat(Object.keys(depth[i])[0])==parseFloat(price)){
+                return i;
+            }
+        }
     }
 
     priceCompute(A_Depth,B_Depth,data){  //type ,price, market, num
