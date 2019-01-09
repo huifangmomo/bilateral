@@ -558,7 +558,6 @@ class Order {
             orderInfo.deal_money = '0';
         }
         if(orderInfo.market.toUpperCase() == this.key.replace("/","")){
-            this.ordersMap.set(parseInt(orderInfo.id),{status:orderStatus,info:orderInfo});
             let type = ['','sell','buy'];
             if(!!this.orderList[0].info){
                 if(parseInt(orderInfo.id)===parseInt(this.orderList[0].info.id)){
@@ -620,6 +619,7 @@ class Order {
                     }
                 }
             }
+            this.ordersMap.set(parseInt(orderInfo.id),{status:orderStatus,info:orderInfo});
         }
 
     }
