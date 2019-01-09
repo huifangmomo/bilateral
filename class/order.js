@@ -100,6 +100,13 @@ class Order {
                                 this.log.deal(order);
                                 this.status = "bilateralSending";
                                 this.ordersMap.delete(parseInt(this.orderList[0].info.id));
+                                if(!result){
+                                    if (this.orderList[1].arguments.type === 'buy') {
+                                        this.orderList[1].arguments.price = ((1 - fee - rate) * this.orderList[0].arguments.price).toFixed(8);
+                                    } else {
+                                        this.orderList[1].arguments.price = (this.orderList[0].arguments.price / (1 - fee - rate)).toFixed(8);
+                                    }
+                                }
                                 this.bilateralLimitOrder();
                             }else{
                                 //this.init();  //第一个订单被撤销后重新搬砖
@@ -123,6 +130,13 @@ class Order {
                             this.log.deal(order);
                             this.status = "bilateralSending";
                             this.ordersMap.delete(parseInt(this.orderList[0].info.id));
+                            if(!result){
+                                if (this.orderList[1].arguments.type === 'buy') {
+                                    this.orderList[1].arguments.price = ((1 - fee - rate) * this.orderList[0].arguments.price).toFixed(8);
+                                } else {
+                                    this.orderList[1].arguments.price = (this.orderList[0].arguments.price / (1 - fee - rate)).toFixed(8);
+                                }
+                            }
                             this.bilateralLimitOrder();
                         }else{
                             this.orderList[0].status = 3;
@@ -182,6 +196,13 @@ class Order {
                 break;
             case 'bilateralSending':
                 if(this.orderList[1].status==null){
+                    if(!result){
+                        if (this.orderList[1].arguments.type === 'buy') {
+                            this.orderList[1].arguments.price = ((1 - fee - rate) * this.orderList[0].arguments.price).toFixed(8);
+                        } else {
+                            this.orderList[1].arguments.price = (this.orderList[0].arguments.price / (1 - fee - rate)).toFixed(8);
+                        }
+                    }
                     this.bilateralLimitOrder();
                 }
                 if(this.orderList[1].status === 1){ //已发送
@@ -200,6 +221,13 @@ class Order {
                                 this.event.emit('woker_end',this.index,1);
                             }else{ //第二个订单被撤销  重新发送
                                 this.ordersMap.delete(parseInt(this.orderList[1].info.id));
+                                if(!result){
+                                    if (this.orderList[1].arguments.type === 'buy') {
+                                        this.orderList[1].arguments.price = ((1 - fee - rate) * this.orderList[0].arguments.price).toFixed(8);
+                                    } else {
+                                        this.orderList[1].arguments.price = (this.orderList[0].arguments.price / (1 - fee - rate)).toFixed(8);
+                                    }
+                                }
                                 this.bilateralLimitOrder();
                             }
                         }
