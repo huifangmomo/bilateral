@@ -35,36 +35,42 @@ class db {
         let sql = "insert into tbl_bilateral(id,marketKey,orderA,amount,startTime) values(?,?,?,?,?)"
         let params = [data.id,data.marketKey, data.orderA, data.amount, moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')];
         this.sqlQueue.add(mysql.format(sql,params))
+        console.log(this.sqlQueue);
     }
     //更新buyPrice
     updateBuyPrice(data) {
         let sql = "update tbl_bilateral set buyPrice=? where id = ?";
         let params = [data.buyPrice,data.id];
         this.sqlQueue.add(mysql.format(sql,params))
+        console.log(this.sqlQueue);
     }
     //更新sellPrice
     updateSellPrice(data) {
         let sql = "update tbl_bilateral set sellPrice=? where id = ?";
         let params = [data.sellPrice,data.id];
         this.sqlQueue.add(mysql.format(sql,params))
+        console.log(this.sqlQueue);
     }
     //更新搬砖订单
     updateBilateral(data) {
         let sql = "update tbl_bilateral set orderB=? where id = ?";
         let params = [data.orderB,data.id];
         this.sqlQueue.add(mysql.format(sql,params))
+        console.log(this.sqlQueue);
     }
     //储存搬砖订单
     saveBilateral(data) {
         let sql = "update tbl_bilateral set orderB=?,profit=?,charge=?,endTime=? where id = ?";
         let params = [data.orderB,data.profit,data.charge,moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),data.id];
         this.sqlQueue.add(mysql.format(sql,params))
+        console.log(this.sqlQueue);
     }
     //存储订单
     saveDeal(data) {
         let sql = "insert into tbl_deal(orderId,market,marketKey,orderType,price,bilateralId,amount,saveTime) values(?,?,?,?,?,?,?,?)";
         let params = [data.orderId, data.market,data.marketKey,data.orderType,data.price,data.bilateralId,data.amount,moment(Date.now()).format('YYYY-MM-DD HH:mm:ss')];
         this.sqlQueue.add(mysql.format(sql,params))
+        console.log(this.sqlQueue);
     }
     //遍历set中的sql语句并执行
     executeSqlQueue(){

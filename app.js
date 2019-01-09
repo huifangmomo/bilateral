@@ -3,8 +3,8 @@
 const params = process.argv.slice(2); //一个交易对数组 [ 'eos', 'eth',"0.01" ]
 const fs = require('fs');
 const EventEmitter = require('events').EventEmitter;
-const A = require("./class/huobi");
-const B = require("./class/okex");
+const B = require("./class/huobi");
+const A = require("./class/okex");
 const Order = require('./class/order');
 const ComConsumer = require('./class/comConsumer');
 
@@ -58,7 +58,7 @@ function main() {
     let B_Depth = {};
 
     const a = new A(null, config.A.AccessID, config.A.SecretKey,"5720120");
-    const b = new B(null, config.B.AccessID, config.B.SecretKey);
+    const b = new B(null, config.B.AccessID, config.B.SecretKey,"5720120");
 
     event.on('depth_update', message => {
         switch (message.topic) {
@@ -88,6 +88,9 @@ function main() {
         }
         if(orderInfo.market.toUpperCase() != (params[0]+params[1])){
             return;
+        }
+        if(orderInfo.price == 0 && !!orderInfo["order-price"]){
+            orderInfo.price = orderInfo["order-price"];
         }
         for (let [key, value] of orderMap) {
             if(value.isOn===true){
@@ -123,6 +126,9 @@ function main() {
             }
 
         }
+        orderMap.get(0).log.info("==============="+topic+"==="+orderStatus+"===============");
+        orderMap.get(0).log.info(orderInfo);
+        orderMap.get(0).log.info("==================================================");
         orderMap.get(0).log.info('==========balances==========');
         orderMap.get(0).log.info(balances);
         orderMap.get(0).log.info('==========balances==========');
@@ -156,6 +162,9 @@ function main() {
             if(orderMap.get(index).bilaterType===1){
                 orderMap.get(index).init();
             }else{
+
+                orderMap.get(index).isOn = false;
+
                 if(isOver(orderMap,1)===true){//目前没有搬到A的worker
                     for (let [key, value] of orderMap) {
                         if(value.isOn===false && value.bilaterType === 1 ){
@@ -170,6 +179,8 @@ function main() {
             if(orderMap.get(index).bilaterType===2){
                 orderMap.get(index).init();
             }else{
+                orderMap.get(index).isOn = false;
+
                 if(isOver(orderMap,2)===true){ //目前没有搬到B的worker
                     for (let [key, value] of orderMap) {
                         if(value.isOn===false && value.bilaterType === 2 ){

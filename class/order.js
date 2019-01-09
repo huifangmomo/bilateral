@@ -40,10 +40,10 @@ class Order {
 
     check(A_Depth,B_Depth,api_A,api_B){
         this.log.info("worker"+this.index+"当前状态: "+this.status);
-        this.log.info("a0="+JSON.stringify(A_Depth.bids[0]));
-        this.log.info("a0="+JSON.stringify(A_Depth.asks[0]));
-        this.log.info("b0="+JSON.stringify(B_Depth.bids[0]));
-        this.log.info("b0="+JSON.stringify(B_Depth.asks[0]));
+        // this.log.info("a0="+JSON.stringify(A_Depth.bids[0]));
+        // this.log.info("a0="+JSON.stringify(A_Depth.asks[0]));
+        // this.log.info("b0="+JSON.stringify(B_Depth.bids[0]));
+        // this.log.info("b0="+JSON.stringify(B_Depth.asks[0]));
 
         const c_bMax_p = parseFloat(Object.keys(A_Depth.bids[0])[0]);  //c最高买价
         const c_bMax_n = parseFloat(Object.values(A_Depth.bids[0])[0]); //c最高买数量
@@ -141,21 +141,26 @@ class Order {
                     let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
                     if(this.orderList[0].arguments.type === 'buy'){
                         if(this.orderList[0].arguments.market === 'A'){
-                            differ = this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.bids[0])[0],depthFix);
-                            depthIndex = this.depthCompute(A_Depth.bids,this.orderList[0].arguments.price);
+                            differ = this.floatCompute(this.orderList[0].info.price,Object.keys(A_Depth.bids[0])[0],depthFix);
+                            depthIndex = this.depthCompute(A_Depth.bids,this.orderList[0].info.price);
                         }else{
-                            differ = this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.bids[0])[0],depthFix);
-                            depthIndex = this.depthCompute(B_Depth.bids,this.orderList[0].arguments.price);
+                            differ = this.floatCompute(this.orderList[0].info.price,Object.keys(B_Depth.bids[0])[0],depthFix);
+                            depthIndex = this.depthCompute(B_Depth.bids,this.orderList[0].info.price);
                         }
                     }else{
                         if(this.orderList[0].arguments.market === 'A'){
-                            differ = this.floatCompute(this.orderList[0].arguments.price,Object.keys(A_Depth.asks[0])[0],depthFix);
-                            depthIndex = this.depthCompute(A_Depth.asks,this.orderList[0].arguments.price);
+                            differ = this.floatCompute(this.orderList[0].info.price,Object.keys(A_Depth.asks[0])[0],depthFix);
+                            depthIndex = this.depthCompute(A_Depth.asks,this.orderList[0].info.price);
                         }else{
-                            differ = this.floatCompute(this.orderList[0].arguments.price,Object.keys(B_Depth.asks[0])[0],depthFix);
-                            depthIndex = this.depthCompute(B_Depth.asks,this.orderList[0].arguments.price);
+                            differ = this.floatCompute(this.orderList[0].info.price,Object.keys(B_Depth.asks[0])[0],depthFix);
+                            depthIndex = this.depthCompute(B_Depth.asks,this.orderList[0].info.price);
                         }
                     }
+
+
+                    this.log.info("订单一精度差"+differ);
+                    this.log.info("订单一深度"+depthIndex);
+
                     if(!result || differ > 5 || depthIndex > 3){//没有盈利空间或者第一单的价格与市场深度1相差5个精确度单位或者深度在4以后
                         this.orderList[0].status = 0;
                         this.orderList[0].arguments.api.cancelOrder({
@@ -230,24 +235,25 @@ class Order {
                     let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
                     if (this.orderList[1].arguments.type === 'buy') {
                         if (this.orderList[1].arguments.market === 'A') {
-                            differ = this.floatCompute(this.orderList[1].arguments.price,Object.keys(A_Depth.bids[0])[0],depthFix);
-                            depthIndex = this.depthCompute(A_Depth.bids,this.orderList[1].arguments.price);
+                            differ = this.floatCompute(this.orderList[1].info.price,Object.keys(A_Depth.bids[0])[0],depthFix);
+                            depthIndex = this.depthCompute(A_Depth.bids,this.orderList[1].info.price);
                         } else {
-                            differ = this.floatCompute(this.orderList[1].arguments.price,Object.keys(B_Depth.bids[0])[0],depthFix);
-                            depthIndex = this.depthCompute(B_Depth.bids,this.orderList[1].arguments.price);
+                            differ = this.floatCompute(this.orderList[1].info.price,Object.keys(B_Depth.bids[0])[0],depthFix);
+                            depthIndex = this.depthCompute(B_Depth.bids,this.orderList[1].info.price);
                         }
                     } else {
                         if (this.orderList[1].arguments.market === 'A') {
-                            differ = this.floatCompute(this.orderList[1].arguments.price,Object.keys(A_Depth.asks[0])[0],depthFix);
-                            depthIndex = this.depthCompute(A_Depth.asks,this.orderList[1].arguments.price);
+                            differ = this.floatCompute(this.orderList[1].info.price,Object.keys(A_Depth.asks[0])[0],depthFix);
+                            depthIndex = this.depthCompute(A_Depth.asks,this.orderList[1].info.price);
                         } else {
-                            differ = this.floatCompute(this.orderList[1].arguments.price,Object.keys(B_Depth.asks[0])[0],depthFix);
-                            depthIndex = this.depthCompute(B_Depth.asks,this.orderList[1].arguments.price);
+                            differ = this.floatCompute(this.orderList[1].info.price,Object.keys(B_Depth.asks[0])[0],depthFix);
+                            depthIndex = this.depthCompute(B_Depth.asks,this.orderList[1].info.price);
                         }
                     }
 
                     this.log.info("订单二精度差"+differ);
                     this.log.info("订单二深度"+depthIndex);
+
 
                     if (result && (differ > 5|| depthIndex>3) ) { //第二单的价格与市场深度1相差5个精确度单位或者在深度4之后  并且 深度1有盈利空间
                         this.orderList[1].status = 0;
@@ -330,7 +336,7 @@ class Order {
         depthFix = this.config.orderOptions.depthFix;
         let m = parseFloat(a)*100000000;
         let n = parseFloat(b)*100000000;
-        let result = Math.abs(m-n)/depthFix*100000000 ;//Math.abs(m-n)-depthFix*100000000*10;
+        let result = Math.abs(m-n)/(depthFix*100000000) ;//Math.abs(m-n)-depthFix*100000000*10;
         return result;
     }
 
@@ -340,6 +346,10 @@ class Order {
                 return i;
             }
         }
+        this.log.info("================不在深度里================");
+        this.log.info(price);
+        this.log.info(depth);
+        return 11;
     }
 
     priceCompute(A_Depth,B_Depth,data){  //type ,price, market, num
@@ -357,7 +367,7 @@ class Order {
                         result["sell"].num = data.num;
                         result.first = "A";
                         result.msg = "B卖";
-                        this.log.info(result);
+                        //this.log.info(result);
                         return result;
                     }
                     if(parseFloat(data.price )< parseFloat((B_Depth.aMin_p-this.fix)*(1-fee-rate))){  //B挂卖
@@ -367,7 +377,7 @@ class Order {
                         result["sell"].num = data.num;
                         result.first = "A";
                         result.msg = "B挂卖";
-                        this.log.info(result);
+                        //this.log.info(result);
                         return result;
                     }
                 }else{
@@ -378,7 +388,7 @@ class Order {
                         result["sell"].num = data.num;
                         result.first = "B";
                         result.msg = "A卖";
-                        this.log.info(result);
+                        //this.log.info(result);
                         return result;
                     }
                     if(parseFloat(data.price) < parseFloat((A_Depth.aMin_p - this.fix)*(1-fee-rate))){  //A挂卖
@@ -403,7 +413,7 @@ class Order {
                         result.get = (profit-charge)/(data.num*result["buy"].price)*2;
                         result.first = "B";
                         result.msg = "在A买";
-                        this.log.info(result);
+                        //this.log.info(result);
                         return result;
                     }
                     if(parseFloat(data.price*(1-fee-rate)) > parseFloat((A_Depth.bMax_p + this.fix))){  //在A挂买
@@ -413,7 +423,7 @@ class Order {
                         result["buy"].num = data.num;
                         result.first = "B";
                         result.msg = "在A挂买";
-                        this.log.info(result);
+                        //this.log.info(result);
                         return result;
                     }
                 }else{
@@ -424,7 +434,7 @@ class Order {
                         result["buy"].num = data.num;
                         result.first = "A";
                         result.msg = "在B买";
-                        this.log.info(result);
+                        //this.log.info(result);
                         return result;
                     }
                     if(parseFloat(data.price*(1-fee-rate)) > parseFloat((B_Depth.bMax_p + this.fix))){  //在B挂买
@@ -434,7 +444,7 @@ class Order {
                         result["buy"].num = data.num;
                         result.first = "A";
                         result.msg = "在B挂买";
-                        this.log.info(result);
+                        //this.log.info(result);
                         return result;
                     }
                 }
@@ -453,7 +463,7 @@ class Order {
                 result["sell"].num = data.num;
                 result.first = "A";
                 result.msg = "在B买A卖";
-                this.log.info(result);
+                //this.log.info(result);
                 return result;
             }
             if(parseFloat(B_Depth.bMax_p*(1-fee-rate)) > parseFloat(A_Depth.aMin_p) && this.bilaterType!==2 && this.config.orderOptions.largest == false){  //在A买B卖
@@ -467,7 +477,7 @@ class Order {
                 result["sell"].num = data.num;
                 result.first = "A";
                 result.msg = "在A买B卖";
-                this.log.info(result);
+                //this.log.info(result);
                 return result;
             }
             if(parseFloat(A_Depth.aMin_p) <parseFloat((B_Depth.aMin_p - this.fix)*(1-fee-rate)) && this.bilaterType!==2 && this.config.orderOptions.largest == false){  //在A买B挂卖
@@ -481,7 +491,7 @@ class Order {
                 result["sell"].num = data.num;
                 result.first = "A";
                 result.msg = "在A买B挂卖";
-                this.log.info(result);
+                //this.log.info(result);
                 return result;
             }
             if(parseFloat(B_Depth.aMin_p) < parseFloat((A_Depth.aMin_p - this.fix)*(1-fee-rate)) && this.bilaterType!==1 && this.config.orderOptions.largest == false){  //在B买A挂卖
@@ -495,7 +505,7 @@ class Order {
                 result["sell"].num = data.num;
                 result.first = "B";
                 result.msg = "在B买A挂卖";
-                this.log.info(result);
+                //this.log.info(result);
                 return result;
             }
             if((A_Depth.aMin_p - B_Depth.bMax_p)>=(B_Depth.aMin_p - A_Depth.bMax_p)  && this.bilaterType!==1){  //B挂买A挂卖
@@ -510,7 +520,7 @@ class Order {
                     result["sell"].num = data.num;
                     result.first = "A";
                     result.msg = "B挂买A挂卖";
-                    this.log.info(result);
+                    //this.log.info(result);
                     return result;
                 }
             }
@@ -526,7 +536,7 @@ class Order {
                     result["sell"].num = data.num;
                     result.first = "A";
                     result.msg = "A挂买B挂卖";
-                    this.log.info(result);
+                    //this.log.info(result);
                     return result;
                 }
             }
@@ -541,9 +551,9 @@ class Order {
     }
 
     order_update(orderStatus,orderInfo){
-        this.log.info("===============worker"+this.index+"order_update"+orderStatus+"===============");
-        this.log.info(orderInfo);
-        this.log.info("==================================================");
+        // this.log.info("===============worker"+this.index+"order_update"+orderStatus+"===============");
+        // this.log.info(orderInfo);
+        // this.log.info("==================================================");
         if(orderInfo.deal_money === 0){
             orderInfo.deal_money = '0';
         }

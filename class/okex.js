@@ -18,30 +18,34 @@ class OKex {
         return new Promise((resolve,reject)=>{
             let self = this
             let market = params.market.split('/')[0].toLowerCase()+'_'+params.market.split('/')[1].toLowerCase()
-            let orderid = parseFloat(params.id)
+            let id = params.id
             let pars = {
-                order_id: orderid,
                 api_key: this.AccessID,
                 symbol: market,
+                order_id: id
             }
-            Object.keys(pars)
             pars.sign = this.sign(this.SecretKey,pars)
+            let data = this.handleRequestData(pars)
             let options = {
                 url: this.baseURL+'order_info.do',
                 method: 'POST',
                 headers: {
-                    'content-type': 'application/x-www-form-urlencoded'
-                    // 'Accept': 'application/json',
+                    'Content-type': 'application/x-www-form-urlencoded'
                 },
-                body: JSON.stringify(pars)
+                body: data
             };
             if (!!self.proxy) {
                 options.proxy = self.proxy
             }
-            request(options, function (error, response, body) {
+            request(options, (error, response, body)=>{
                 try {
                     body = JSON.parse(body);
-
+                    if(body.result){
+                        let result = this.handleOrderInfo(body.orders[0])
+                        resolve(result)
+                    }else{
+                        resolve(null)
+                    }
                 } catch (e) {
                     console.log("limitOrderERROR")
                     console.log(e)
@@ -96,6 +100,38 @@ class OKex {
                 }
             });
         })
+    }
+    handleOrderInfo(params){
+        let result= {}
+        let data = {}
+        result.code=0
+        data.amount=params.amount
+        data.avg_price=params.avg_price
+        data.create_time=params.create_date
+        data.deal_amount=params.deal_amount
+        data.deal_money=parseFloat(params.deal_amount)*parseFloat(params.avg_price)
+        data.id=params.order_id
+        data.left=parseFloat(params.amount)-parseFloat(params.deal_amount)
+        data.market=params.symbol.split('_')[0].toUpperCase()+params.symbol.split('_')[1].toUpperCase()
+        data.price = params.price
+        if(parseInt(params.status)==-1){
+            data.status = 'cancelled'
+        }else if(parseInt(params.status)==0){
+            data.status = 'not_deal'
+        }else if(parseInt(params.status)==1){
+            data.status = 'part_deal'
+        }else if(parseInt(params.status)==2){
+            data.status = 'done'
+        }else if(parseInt(params.status)==3){
+            data.status = 'cancelling'
+        }else if(parseInt(params.status)==4){
+            data.status = 'sendFail'
+        }else if(parseInt(params.status)==5){
+            data.status = 'sending'
+        }
+        data.type = params.type
+        result.data=data
+        return result
     }
     handleLimitOrderResult(postBody,res){
         let result= {}

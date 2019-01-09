@@ -57,7 +57,7 @@
 //     return {profit:profit,charge:charge}
 // }
 //
-// var data = (profitCompute(0.00200357,0.002005,0.1));
+// var data = (profitCompute(0.002176,0.00217789,0.1));
 // console.log(data.profit.toFixed(8));
 // console.log(data.charge.toFixed(8));
 
@@ -88,5 +88,9 @@
 // //let len=s.split('.')[1].length;
 // console.log(s.toFixed(5))
 
-console.log(Math.pow(0.1,8).toFixed(8));
+// if(parseFloat('0.00600')==parseFloat("0.006")){
+//     console.log(true)
+// }
+
+
 

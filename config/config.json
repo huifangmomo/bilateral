@@ -1,10 +1,10 @@
 {
-    "B": {
+    "A": {
         "name":"okex",
         "AccessID":"9197e2ce-d0d0-46ef-af7c-c7044f344d08",
         "SecretKey":"7C78193247421C524C5126502D606585"
     },
-    "A": {
+    "B": {
         "name":"huobi",
         "AccessID":"e0a3f6f6-8e83998f-0004ab9c-32c4c",
         "SecretKey":"63f539a2-686ff4d8-ff3b6157-6c931"
@@ -38,14 +38,14 @@
         "fromOffset":true
     },
     "balance": {
-        "A": [0.2164,0.00434442],
-        "B": [1.52900,0.00406234]
+        "B": [0.746200,0.00285412],
+        "A": [1.019,0.0051]
     },
     "orderOptions": {
-        "APoint": 6,
-        "BPoint": 8,
-        "feeA": 0.00052,
-        "feeB": 0.000195,
+        "BPoint": 6,
+        "APoint": 8,
+        "feeB": 0.00052,
+        "feeA": 0.000195,
         "rate": 0.0,
         "normal": 0,
         "toA": 3,
