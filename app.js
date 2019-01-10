@@ -140,6 +140,7 @@ function main() {
                 if(value.isOn===false && value.bilaterType === orderMap.get(index).bilaterType ){
                     value.isOn = true;
                     value.log.info("==============worker"+key);
+                    value.init();
                     break;
                 }
             }
@@ -170,6 +171,7 @@ function main() {
                         if(value.isOn===false && value.bilaterType === 1 ){
                             value.isOn = true;
                             value.log.info("==============worker"+key);
+                            value.init();
                             break;
                         }
                     }
@@ -186,6 +188,7 @@ function main() {
                         if(value.isOn===false && value.bilaterType === 2 ){
                             value.isOn = true;
                             value.log.info("==============worker"+key);
+                            value.init();
                             break;
                         }
                     }
