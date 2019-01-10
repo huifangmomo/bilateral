@@ -92,11 +92,6 @@ function main() {
         if(orderInfo.price == 0 && !!orderInfo["order-price"]){
             orderInfo.price = orderInfo["order-price"];
         }
-        for (let [key, value] of orderMap) {
-            if(value.isOn===true){
-                value.order_update(orderStatus,orderInfo)
-            }
-        }
         if(parseInt(orderStatus)===1){
             let market = "A";
             if(topic===config.B.name){
@@ -125,6 +120,11 @@ function main() {
                 balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount)*p;
             }
 
+        }
+        for (let [key, value] of orderMap) {
+            if(value.isOn===true){
+                value.order_update(orderStatus,orderInfo)
+            }
         }
         orderMap.get(0).log.info("==============="+topic+"==="+orderStatus+"===============");
         orderMap.get(0).log.info(orderInfo);
