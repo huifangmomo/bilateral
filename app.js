@@ -97,27 +97,34 @@ function main() {
             if(topic===config.B.name){
                 market = "B";
             }
-            balances[market][0] -= parseFloat(orderInfo.amount);
-            balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+
+            if(parseInt(orderInfo.side)===1){ //卖出 -NEO
+                balances[market][0] -= parseFloat(orderInfo.amount);
+            }else{ //-BTC
+                balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+            }
         }else if(parseInt(orderStatus)===3 ){
             if((orderInfo.deal_money === 0 || orderInfo.deal_money === '0')){
                 let market = "A";
                 if(topic===config.B.name){
                     market = "B";
                 }
-                balances[market][0] += parseFloat(orderInfo.amount);
-                balances[market][1] += parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+                if(parseInt(orderInfo.side)===1){ //取消卖   +NEO
+                    balances[market][0] += parseFloat(orderInfo.amount);
+                }else{ //取消买    +BTC
+                    balances[market][1] += parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+                }
+
             }else {
                 let market = "A";
-                let p = 1;
                 if(topic===config.B.name){
                     market = "B";
                 }
-                if(parseInt(orderInfo.side)===1){ //卖出
-                    p = -1;
+                if(parseInt(orderInfo.side)===1){ //卖出 +BTC
+                    balances[market][1] += parseFloat(orderInfo.price)*parseFloat(orderInfo.amount);
+                }else{ //买到 +NEO
+                    balances[market][0] += parseFloat(orderInfo.amount);
                 }
-                balances[market][0] += parseFloat(orderInfo.amount)*p;
-                balances[market][1] -= parseFloat(orderInfo.price)*parseFloat(orderInfo.amount)*p;
             }
 
         }
@@ -136,6 +143,11 @@ function main() {
     event.on('woker_start',index => {
         console.log('woker_start'+index);
         orderMap.get(index).timeoutObj = setTimeout(() => {
+
+        if(balances.A[0]>config.orderOptions.amount &&
+            balances.B[0]>config.orderOptions.amount &&
+            balances.A[1]>config.orderOptions.amount*0.003 &&
+            balances.B[1]>config.orderOptions.amount*0.003) { //两边都能搬
             for (let [key, value] of orderMap) {
                 if(value.isOn===false && value.bilaterType === orderMap.get(index).bilaterType ){
                     value.isOn = true;
@@ -144,6 +156,26 @@ function main() {
                     break;
                 }
             }
+        }else if(balances.A[1]>config.orderOptions.amount*0.003 && balances.B[0]>config.orderOptions.amount && orderMap.get(index).bilaterType===1){ //能搬到A
+            for (let [key, value] of orderMap) {
+                if(value.isOn===false && value.bilaterType === orderMap.get(index).bilaterType ){
+                    value.isOn = true;
+                    value.log.info("==============worker"+key);
+                    value.init();
+                    break;
+                }
+            }
+        }else if(balances.B[1]>config.orderOptions.amount*0.003 && balances.A[0]>config.orderOptions.amount && orderMap.get(index).bilaterType===2){ //能搬到B
+            for (let [key, value] of orderMap) {
+                if(value.isOn===false && value.bilaterType === orderMap.get(index).bilaterType ){
+                    value.isOn = true;
+                    value.log.info("==============worker"+key);
+                    value.init();
+                    break;
+                }
+            }
+        }
+
         }, 15000);
 
     });
