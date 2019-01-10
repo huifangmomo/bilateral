@@ -329,9 +329,11 @@ class Order {
                 }
 
                 if (this.orderList[1].arguments.type === 'buy') {
-                    this.orderList[1].arguments.price = ((1 - fee - rate) * this.orderList[0].arguments.price).toFixed(8);
+                    let s = (1 - fee - rate) * this.orderList[0].arguments.price;
+                    this.orderList[1].arguments.price = this.ceilCompute(s,8);//((1 - fee - rate) * this.orderList[0].arguments.price).toFixed(8);
                 } else {
-                    this.orderList[1].arguments.price = (this.orderList[0].arguments.price / (1 - fee - rate)).toFixed(8);
+                    let s = this.orderList[0].arguments.price / (1 - fee - rate);
+                    this.orderList[1].arguments.price = this.ceilCompute(s,8);//(this.orderList[0].arguments.price / (1 - fee - rate)).toFixed(8);
                 }
                 if(this.orderList[1].status === 1){
                     this.orderList[1].status = 0;
@@ -358,6 +360,10 @@ class Order {
             }
                 break;
         }
+    }
+
+    ceilCompute(value,num){ //向上取整 返回字符串
+        return ''+Math.ceil(value*Math.pow(10,num))/Math.pow(10,num)
     }
 
     floatCompute(a,b,depthFix){ //返回的值为相差的精度
@@ -659,7 +665,7 @@ class Order {
                 this.orderList[0].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[0].arguments.type,
-                    price: parseFloat(this.orderList[0].arguments.price).toFixed(this.config.orderOptions[this.orderList[0].arguments.market+"Point"]),
+                    price: this.ceilCompute(parseFloat(this.orderList[0].arguments.price),this.config.orderOptions[this.orderList[0].arguments.market+"Point"]),
                     amount: this.config.orderOptions.amount//Math.min(this.orderList[0].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
@@ -680,7 +686,7 @@ class Order {
                 this.orderList[1].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[1].arguments.type,
-                    price: parseFloat(this.orderList[1].arguments.price).toFixed(this.config.orderOptions[this.orderList[1].arguments.market+"Point"]),
+                    price: this.ceilCompute(parseFloat(this.orderList[1].arguments.price),this.config.orderOptions[this.orderList[1].arguments.market+"Point"]),
                     amount: this.config.orderOptions.amount//Math.min(this.orderList[1].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
@@ -700,7 +706,7 @@ class Order {
                 this.orderList[1].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[1].arguments.type,
-                    price:parseFloat(this.orderList[1].arguments.price).toFixed(this.config.orderOptions[this.orderList[1].arguments.market+"Point"]),
+                    price: this.ceilCompute(parseFloat(this.orderList[1].arguments.price),this.config.orderOptions[this.orderList[1].arguments.market+"Point"]),
                     amount: this.config.orderOptions.amount//Math.min(this.orderList[1].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
