@@ -24,6 +24,8 @@ function main() {
         let order = new Order(tradeString,params[2],i,config,0,event);
         order.isOn = false;
         if(i===0){
+            balancesCompute(order);
+            order.init();
             order.isOn = true;
         }
         orderMap.set(i,order)
@@ -34,6 +36,8 @@ function main() {
         let order = new Order(tradeString,params[2],index,config,1,event);
         order.isOn = false;
         if(i===0){
+            balancesCompute(order);
+            order.init();
             order.isOn = true;
         }
         orderMap.set(i+config.orderOptions.normal,order)
@@ -44,6 +48,8 @@ function main() {
         let order = new Order(tradeString,params[2],index,config,2,event);
         order.isOn = false;
         if(i===0){
+            balancesCompute(order);
+            order.init();
             order.isOn = true;
         }
         orderMap.set(index,order)
@@ -140,7 +146,7 @@ function main() {
     event.on('woker_start',index => {
         console.log('woker_start'+index);
         orderMap.get(index).timeoutObj = setTimeout(() => {
-
+        let order = null;
         if(balances.A[0]>config.orderOptions.amount &&
             balances.B[0]>config.orderOptions.amount &&
             balances.A[1]>config.orderOptions.amount*config.orderOptions.maxPrice &&
@@ -148,9 +154,7 @@ function main() {
             for (let [key, value] of orderMap) {
                 if(value.isOn===false && value.bilaterType === orderMap.get(index).bilaterType ){
                     value.log.info("==============worker"+key);
-                    balancesCompute(value);
-                    value.init();
-                    value.isOn = true;
+                    order = value;
                     break;
                 }
             }
@@ -158,9 +162,7 @@ function main() {
             for (let [key, value] of orderMap) {
                 if(value.isOn===false && value.bilaterType === orderMap.get(index).bilaterType ){
                     value.log.info("==============worker"+key);
-                    balancesCompute(value);
-                    value.init();
-                    value.isOn = true;
+                    order = value;
                     break;
                 }
             }
@@ -168,12 +170,16 @@ function main() {
             for (let [key, value] of orderMap) {
                 if(value.isOn===false && value.bilaterType === orderMap.get(index).bilaterType ){
                     value.log.info("==============worker"+key);
-                    balancesCompute(value);
-                    value.init();
-                    value.isOn = true;
+                    order = value;
                     break;
                 }
             }
+        }
+
+        if(order){
+            balancesCompute(order);
+            order.init();
+            order.isOn = true;
         }
 
         }, 15000);

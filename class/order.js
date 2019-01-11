@@ -26,7 +26,6 @@ class Order {
         fee = config.orderOptions.feeA + config.orderOptions.feeB;
         rate = config.orderOptions.rate*2;
         this.bilaterType = bilaterType;  //0策略搬  1搬到A，就是A买  2搬到B，就是B买
-        this.init();
     }
     //初始化
     init() {

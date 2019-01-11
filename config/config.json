@@ -38,8 +38,8 @@
         "fromOffset":true
     },
     "balance": {
-        "B": [0.08620000,0.01806879],
-        "A": [8.80900,0.0021]
+        "B": [0.98620000,0.01613869],
+        "A": [7.90900,0.0041]
     },
     "orderOptions": {
         "BPoint": 6,
@@ -49,7 +49,7 @@
         "rate": 0.0,
         "normal": 0,
         "toA": 0,
-        "toB": 1,
+        "toB": 3,
         "depthFix": 0.000001,
         "largest": true,
         "amount": 0.1,
