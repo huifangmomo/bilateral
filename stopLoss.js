@@ -17,18 +17,7 @@ class StopLoss {
 
     init(){
 
-        // this.connection.query("SELECT * FROM tbl_bilateral where charge is NULL;", (err, data)=>{ //还没有收益的订单
-        //     if(err)
-        //         console.log('出错了', err);
-        //     else{
-        //         console.log('成功了');
-        //         console.log(data);
-        //         this.getOrdersInfo(data);
-        //     }
-        //
-        // });
-
-        this.connection.query("SELECT * FROM tbl_bilateral where profit = -1;", (err, data)=>{ //还没有收益的订单
+        this.connection.query("SELECT * FROM tbl_bilateral where charge is NULL;", (err, data)=>{ //还没有收益的订单
             if(err)
                 console.log('出错了', err);
             else{
@@ -38,6 +27,17 @@ class StopLoss {
             }
 
         });
+
+        // this.connection.query("SELECT * FROM tbl_bilateral where profit = -1;", (err, data)=>{ //还没有收益的订单
+        //     if(err)
+        //         console.log('出错了', err);
+        //     else{
+        //         console.log('成功了');
+        //         console.log(data);
+        //         this.getOrdersInfo(data);
+        //     }
+        //
+        // });
     }
 
     profitCompute(buyPrice,sellPrice,num){

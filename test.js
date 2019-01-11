@@ -1,16 +1,18 @@
 'use strict';
 // const fs = require('fs');
-// const CoinEx = require("./class/coinex");
-// const HuoBi = require("./class/huobi");
+// const B = require("./class/huobi");
+// const A = require("./class/okex");
+// const DB = require('./db');
+// let db = new DB();
 //
 // const config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
-
-// const coinex = new CoinEx(null, config.A.AccessID, config.A.SecretKey);
-// const huobi = new HuoBi(null, "a0abfc0b-55125de2-ed3f1aff-abedb", "f6041f13-29ceed20-c2bc80fd-02224","5720120");
+//
+// const a = new A(null, config.A.AccessID, config.A.SecretKey,"5720120");
+// const b = new B(null, config.B.AccessID, config.B.SecretKey,"5720120");
 //
 // async function getInfo(){
-//     let A_B = await coinex.getOrderInfo({
-//         market: 'XRPBTC',
+//     let A_B = await a.getOrderInfo({
+//         market: 'NEOBTC',
 //         id:2980963410
 //     })
 //
@@ -57,9 +59,9 @@
 //     return {profit:profit,charge:charge}
 // }
 //
-// var data = (profitCompute(0.002176,0.00217789,0.1));
-// console.log(data.profit.toFixed(8));
-// console.log(data.charge.toFixed(8));
+// var data = (profitCompute('0.00230501','0.0023070',0.1));
+// console.log(data.profit.toFixed(13));
+// console.log(data.charge.toFixed(13));
 
 // const mysql = require('mysql')
 // const moment = require('moment')
@@ -83,14 +85,16 @@
 //         console.log(res)
 //     }
 // })
-
-// let s = 0.000088
+//
+// let s = 0.00001111111111
 // //let len=s.split('.')[1].length;
-// console.log(s.toFixed(5))
+// console.log(Math.ceil(s*Math.pow(10,8))/Math.pow(10,8))
 
 // if(parseFloat('0.00600')==parseFloat("0.006")){
 //     console.log(true)
 // }
 
+// let a = null;
+// console.log(!a)
 
-
+console.log(("sell").split('-')[0])
