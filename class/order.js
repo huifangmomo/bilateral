@@ -768,6 +768,24 @@ class Order {
 
     }
 
+    exit(){
+        if(this.status == 'pending'){
+            this.orderList[0].arguments.api.cancelOrder({
+                market: this.key,
+                id: this.orderList[0].info.id
+            }).then(cancelOrderResult=>{
+                if(!!cancelOrderResult){
+                    this.log.info("取消第一个订单成功"+this.orderList[0].info.id);
+                    this.log.http({arguments:this.orderList[0].arguments,msg:"取消第一个订单成功"+this.orderList[0].info.id});
+                    this.orderList[0].status = 3;
+                }else{
+                    this.orderList[0].status = 1;
+                    this.log.exception({arguments:this.orderList[0].arguments,msg:'取消第一个订单失败了'+this.orderList[0].info.id});
+                }
+            })
+        }
+    }
+
     // priceCompute(){
     //     if(this.balances.A[0]>this.config.orderOptions.amount && this.balances.B[1]>this.config.orderOptions.amount*0.003 && //可以A卖B买
     //         this.balances.B[0]>this.config.orderOptions.amount && this.balances.A[1]>this.config.orderOptions.amount*0.003){ //可以B卖A买

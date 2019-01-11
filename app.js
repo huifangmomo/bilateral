@@ -13,6 +13,7 @@ const tradeString = params[0] +'/'+ params[1];
 const config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
 
 let balances = config.balance;
+let dropNum = 0;
 
 function main() {
     let event = new EventEmitter();
@@ -185,11 +186,20 @@ function main() {
         }, 15000);
 
     });
-    event.on('woker_end',(index,type) => {
+    event.on('woker_end',(index,type) => {  //type  0 第一个订单被撤销   1 搬砖结束    2 放弃
         orderMap.get(index).log.info('woker_end'+index+"_"+type);
         if(orderMap.get(index).timeoutObj){
             clearTimeout(orderMap.get(index).timeoutObj);
             orderMap.get(index).timeoutObj = null;
+        }
+
+        if(type == 2){
+            dropNum ++;
+            if(dropNum>(config.orderOptions.normal+config.orderOptions.toA+config.orderOptions.toB)){  //如果连续被抛弃的单数大于总worker数 则结束进程
+                exit();
+            }
+        }else if(type == 1){
+            dropNum = 0;
         }
 
         let obj = orderMap.get(index).balances;
@@ -289,10 +299,27 @@ function isOver(orderMap,type){
     return true;
 }
 
+function cancelOrders() {
+    for (let [key, value] of orderMap) {
+        value.isOn=false;
+        value.exit();
+    }
+}
+
+function exit(){
+    cancelOrders();
+    setTimeout(() => {
+        process.exit(0);
+    }, 8000);
+}
 
 //全局异常
 process.on('uncaughtException', function (err) {
     console.log(err.stack);
+});
+
+process.on('SIGINT', function () {
+    exit();
 });
 
 main();
