@@ -22,16 +22,12 @@ class StopLoss {
         //         console.log('出错了', err);
         //     else{
         //         console.log('成功了');
-        //         console.log(JSON.stringify(data));
-        //         for (let i=0; i<data.length;i++) {
-        //             if(!data[i].orderB){ //没有订单二
-        //
-        //             }
-        //         }
+        //         console.log(data);
+        //         this.getOrdersInfo(data);
         //     }
         //
         // });
-        //
+
         this.connection.query("SELECT * FROM tbl_bilateral where profit = -1;", (err, data)=>{ //还没有收益的订单
             if(err)
                 console.log('出错了', err);

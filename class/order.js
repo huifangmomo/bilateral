@@ -36,6 +36,26 @@ class Order {
         this.orderList[1] = {};
         this.ordersMap.clear();
         this.bilaterId = UUID.v1();
+        this.balances = {
+            B: [0,0],
+            A: [0,0]
+        };
+        if(this.bilaterType==0){
+            this.balances = {
+                B: [this.config.orderOptions.amount,this.config.orderOptions.amount*this.config.orderOptions.maxPrice],
+                A: [this.config.orderOptions.amount,this.config.orderOptions.amount*this.config.orderOptions.maxPrice]
+            };
+        }else if(this.bilaterType==1){
+            this.balances = {
+                B: [this.config.orderOptions.amount,0],
+                A: [0,this.config.orderOptions.amount*this.config.orderOptions.maxPrice]
+            };
+        }else if(this.bilaterType==2){
+            this.balances = {
+                B: [0,this.config.orderOptions.amount*this.config.orderOptions.maxPrice],
+                A: [this.config.orderOptions.amount,0]
+            };
+        }
     }
 
     check(A_Depth,B_Depth,api_A,api_B){
@@ -604,6 +624,13 @@ class Order {
                         }
                     }
                     if(parseInt(orderStatus)===3 && orderInfo.deal_money!=='0'){
+                        if(parseInt(orderInfo.side)==1){ //卖
+                            this.balances[this.orderList[0].arguments.market][0] -= this.config.orderOptions.amount;
+                            this.balances[this.orderList[0].arguments.market][1] += parseFloat(''+orderInfo.deal_money);
+                        }else{//买
+                            this.balances[this.orderList[0].arguments.market][0] += this.config.orderOptions.amount;
+                            this.balances[this.orderList[0].arguments.market][1] -= parseFloat(''+orderInfo.deal_money);
+                        }
                         db.saveDeal({orderId:''+orderInfo.id,
                             market:this.config[this.orderList[0].arguments.market].name,
                             marketKey:this.key,
@@ -628,6 +655,13 @@ class Order {
                         db.updateBilateral({id:this.bilaterId,orderB:''});
                     }
                     if(parseInt(orderStatus)===3 && orderInfo.deal_money!=='0'){
+                        if(parseInt(orderInfo.side)==1){ //卖
+                            this.balances[this.orderList[1].arguments.market][0] -= this.config.orderOptions.amount;
+                            this.balances[this.orderList[1].arguments.market][1] += parseFloat(''+orderInfo.deal_money);
+                        }else{//买
+                            this.balances[this.orderList[1].arguments.market][0] += this.config.orderOptions.amount;
+                            this.balances[this.orderList[1].arguments.market][1] -= parseFloat(''+orderInfo.deal_money);
+                        }
                         let buyPrice = this.orderList[0].arguments.price;
                         let sellPrice = orderInfo.price;
                         if(this.orderList[0].arguments.type==="sell"){
@@ -703,15 +737,23 @@ class Order {
                 break;
             case 'endAuto':
                 this.orderList[1].status = 0;
+                let price = this.ceilCompute(parseFloat(this.orderList[1].arguments.price),this.config.orderOptions[this.orderList[1].arguments.market+"Point"]);
                 this.orderList[1].arguments.api.limitOrder({
                     market: this.key,
                     type: this.orderList[1].arguments.type,
-                    price: this.ceilCompute(parseFloat(this.orderList[1].arguments.price),this.config.orderOptions[this.orderList[1].arguments.market+"Point"]),
+                    price: price,
                     amount: this.config.orderOptions.amount//Math.min(this.orderList[1].arguments.num,1)+""
                 }).then(limitOrderResult=>{
                     if(!!limitOrderResult){
                         this.orderList[1].status = 1;
                         this.orderList[1].info = limitOrderResult.data;
+                        if(this.orderList[1].arguments.type=='sell'){ //卖
+                            this.balances[this.orderList[1].arguments.market][0] -= this.config.orderOptions.amount;
+                            this.balances[this.orderList[1].arguments.market][1] += this.config.orderOptions.amount*parseFloat(price);
+                        }else{//买
+                            this.balances[this.orderList[1].arguments.market][0] += this.config.orderOptions.amount;
+                            this.balances[this.orderList[1].arguments.market][1] -= this.config.orderOptions.amount*parseFloat(price);
+                        }
                         this.log.http({arguments:this.orderList[1].arguments,msg:"订单二发送成功，结束自动"+this.orderList[1].info.id});
                         db.saveBilateral({id:this.bilaterId,orderB:''+this.orderList[1].info.id,profit:-1,charge:-1});
                         this.status = "bilateralEnd";
@@ -726,6 +768,18 @@ class Order {
         }
 
     }
+
+    // priceCompute(){
+    //     if(this.balances.A[0]>this.config.orderOptions.amount && this.balances.B[1]>this.config.orderOptions.amount*0.003 && //可以A卖B买
+    //         this.balances.B[0]>this.config.orderOptions.amount && this.balances.A[1]>this.config.orderOptions.amount*0.003){ //可以B卖A买
+    //         return true;
+    //     }else if(this.balances.B[0]>this.config.orderOptions.amount && this.balances.A[1]>this.config.orderOptions.amount*0.003 && this.bilaterType == 1){  //可以B卖A买 toA
+    //         return true;
+    //     }else if(this.balances.A[0]>this.config.orderOptions.amount && this.balances.B[1]>this.config.orderOptions.amount*0.003 && this.bilaterType == 2){  ///可以A卖B买  toB
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 }
 module.exports = Order;
