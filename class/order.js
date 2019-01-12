@@ -614,8 +614,14 @@ class Order {
             let type = ['','sell','buy'];
             if(!!this.orderList[0].info){
                 if(parseInt(orderInfo.id)===parseInt(this.orderList[0].info.id)){
-                    if(this.orderList[0].status ==1 &&(parseInt(orderStatus)===2 ||(parseInt(orderStatus)===3 && orderInfo.deal_money!=='0'))){
-                        db.insertOrgin({id:this.bilaterId,marketKey:this.key,orderA:''+orderInfo.id,amount:orderInfo.amount});
+                    if((parseInt(orderStatus)===2 ||(parseInt(orderStatus)===3 && orderInfo.deal_money!=='0'))){
+                    	if(this.orderList[0].isInsert==true){
+                    		
+                    	}else{
+                    		db.insertOrgin({id:this.bilaterId,marketKey:this.key,orderA:''+orderInfo.id,amount:orderInfo.amount});
+                    		this.orderList[0].isInsert=true;
+                    	}
+                        
                         if(parseInt(orderInfo.side)==1){
                             db.updateSellPrice({id:this.bilaterId,sellPrice:''+orderInfo.price});
                         }else{
@@ -686,7 +692,16 @@ class Order {
                     }
                 }
             }
-            this.ordersMap.set(parseInt(orderInfo.id),{status:orderStatus,info:orderInfo});
+            
+            let order = this.ordersMap.get(parseInt(orderInfo.id));
+                if (order) {
+                    // this.orderList[1].status = parseInt(order.status) ;
+                    if (parseInt(order.status) < parseInt(orderStatus)) {
+                        this.ordersMap.set(parseInt(orderInfo.id),{status:orderStatus,info:orderInfo});
+                    }
+                }else{
+                	this.ordersMap.set(parseInt(orderInfo.id),{status:orderStatus,info:orderInfo});
+                }
         }
 
     }

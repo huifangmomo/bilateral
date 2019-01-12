@@ -7,6 +7,8 @@ const B = require("./class/huobi");
 const A = require("./class/okex");
 const Order = require('./class/order');
 const ComConsumer = require('./class/comConsumer');
+let exec = require('child_process').exec;
+let str = 'pm2 stop bilateral_NEOBTC_fix';
 
 const tradeString = params[0] +'/'+ params[1];
 
@@ -68,6 +70,7 @@ function main() {
     const b = new B(null, config.B.AccessID, config.B.SecretKey,"5720120");
 
     event.on('depth_update', message => {
+    	console.log(message.topic)
       switch (message.topic) {
           case "depth_"+config.A.name+"_" + params[0]+params[1]:
               if(message == 3){
@@ -196,7 +199,17 @@ function main() {
       if(type == 2){
           dropNum ++;
           if(dropNum>(config.orderOptions.normal+config.orderOptions.toA+config.orderOptions.toB)){  //如果连续被抛弃的单数大于总worker数 则结束进程
-              exit();
+              cancelOrders();
+              setTimeout(()=>{
+                  exec(str, function(err,stdout,stderr){
+                      if(err) {
+                          console.log('error:'+stderr)
+                      }else {
+                          console.log(stdout)
+                          console.log(stderr)
+                      }
+                  });
+              },5000);
           }
       }else if(type == 1){
           dropNum = 0;
@@ -307,21 +320,9 @@ function cancelOrders() {
     }
 }
 
-function waitOver() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve("结束进程")
-        }, 8000);
-    })
-}
-
 async function exit(){
     cancelOrders();
-    let result = await waitOver();
-    if(!!result){
-        console.log(result);
-        process.exit(0);
-    }
+    process.exit(0);
 }
 
 //全局异常
