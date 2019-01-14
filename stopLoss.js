@@ -16,8 +16,7 @@ class StopLoss {
     }
 
     init(){
-
-        this.connection.query("SELECT * FROM tbl_bilateral where charge is NULL;", (err, data)=>{ //还没有收益的订单
+        this.connection.query("SELECT * FROM tbl_bilateral where profit = -2 or profit is NULL;", (err, data)=>{ //还没有收益的订单
             if(err)
                 console.log('出错了', err);
             else{
@@ -27,17 +26,6 @@ class StopLoss {
             }
 
         });
-        //
-//         this.connection.query("SELECT * FROM tbl_bilateral where profit = -1;", (err, data)=>{ //还没有收益的订单
-//             if(err)
-//                 console.log('出错了', err);
-//             else{
-//                 console.log('成功了');
-//                 console.log(data);
-//                 this.getOrdersInfo(data);
-//             }
-//        
-//         });
     }
 
 
@@ -78,6 +66,7 @@ class StopLoss {
                     if(!!resultB.data){
                         resultB = resultB.data;
                     }
+                    console.log(resultB.state);
                     if((resultB.type).split('-')[0]=='buy'){
                         buyPrice = resultB.price;
                         db.updateBuyPrice({id:data[i].id,buyPrice:''+buyPrice});
@@ -88,7 +77,8 @@ class StopLoss {
                     }
                     if(resultB.state == "done" || resultB.state == "filled"){
                         let value = (this.profitCompute(buyPrice,sellPrice,parseFloat(data[i].amount)));
-                        db.saveBilateral({id:data[i].id,orderB:''+resultB.id,profit:value.profit,charge:value.charge});
+                        db.saveBilateral({id:data[i].id,orderB:''+resultB.id,profit:value.profit});
+                        db.updateCharge({id:data[i].id,charge:value.charge});
                         db.saveDeal({orderId:''+resultB.id,
                             market:'huobi',
                             marketKey:data[i].marketKey,
@@ -96,8 +86,24 @@ class StopLoss {
                             price:''+resultB.price,
                             bilateralId:data[i].id,
                             amount:data[i].amount});
+                        db.updateStatus({id:data[i].id,orderStatus:3})
+                    }
+
+                    if(resultB.state == "canceled") {
+                        if((resultB.type).split('-')[0]=='buy'){
+                            buyPrice = '';
+                            db.updateBuyPrice({id:data[i].id,buyPrice:''+buyPrice});
+                        }
+                        if((resultB.type).split('-')[0]=='sell'){
+                            sellPrice = '';
+                            db.updateSellPrice({id:data[i].id,sellPrice:''+sellPrice});
+                        }
+                        db.updateProfit({id:data[i].id,profit:0})
+                        db.updateStatus({id:data[i].id,orderStatus:2});
                     }
                 }
+            }else{
+                db.updateProfit({id:data[i].id,profit:0});
             }
         }
     }

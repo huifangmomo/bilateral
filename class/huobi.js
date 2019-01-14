@@ -110,8 +110,12 @@ class Huobi {
                     headers: headers
                 }).then(data => {
                     let json = JSON.parse(data);
+                    // console.log("================================")
+                    // console.log(json)
+                    // console.log("================================")
                     if (json.status == 'ok') {
-                        resolve(json.data);
+                        let result = this.handleOrderInfo(json.data)
+                        resolve(result);
                     } else {
                         console.log('调用错误', json);
                         resolve(null);
@@ -158,6 +162,40 @@ class Huobi {
         let body = this.get_body();
         let payload = this.sign_sha('GET', URL_HUOBI_PRO, path, body);
         return this.call_api('GET', path, payload, body);
+    }
+    handleOrderInfo(params){
+        let result= {}
+        let data = {}
+        result.code=0
+        data.amount=params.amount
+        data.avg_price=params.price
+        data.create_time=params['created-at']
+        data.deal_amount=params['field-amount']
+        data.deal_money=parseFloat(data.deal_amount)*parseFloat(data.avg_price)
+        data.id=params.id
+        data.left=parseFloat(data.amount)-parseFloat(data.deal_amount)
+        data.market=params.symbol.toUpperCase()
+        data.price = params.price
+        if(params.state=='submitting'){
+            data.status = params.status
+        }else if(params.state=='submitted'){
+            data.status = params.status
+        }else if(params.state=='partial-filled'){
+            data.status = 'part_deal'
+        }else if(params.state=='partial-canceled'){
+            data.status = 'part_deal'
+        }else if(params.state=='filled'){
+            data.status = 'done'
+        }else if(params.state=='canceled'){
+            data.status = 'canceled'
+        }
+        if(params.type=='buy-market'||params.type=='buy-limit'||params.type=='buy-ioc'){
+            data.type = 'buy'
+        }else if(params.type=='sell-market'||params.type=='sell-limit'||params.type=='sell-ioc'){
+            data.type = 'sell'
+        }
+        result.data=data
+        return result
     }
     buy_limit (symbol, amount, price) {
         let path = '/v1/order/orders/place';

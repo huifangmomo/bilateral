@@ -320,10 +320,24 @@ function cancelOrders() {
     }
 }
 
+function waitOver() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve("结束进程")
+        }, 8000);
+    })
+}
+
+
 async function exit(){
     cancelOrders();
-    process.exit(0);
+    let result = await waitOver();
+    if(!!result) {
+        console.log(result);
+        process.exit(0);
+    }
 }
+
 
 //全局异常
 process.on('uncaughtException', function (err) {

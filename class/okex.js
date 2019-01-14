@@ -40,14 +40,15 @@ class OKex {
             request(options, (error, response, body)=>{
                 try {
                     body = JSON.parse(body);
-                    if(body.result){
+
+                    if(body.result&&parseInt(body.orders.length)>0){
                         let result = this.handleOrderInfo(body.orders[0])
                         resolve(result)
                     }else{
                         resolve(null)
                     }
                 } catch (e) {
-                    console.log("limitOrderERROR")
+                    console.log("getOrderInfoERROR")
                     console.log(e)
                     resolve(null)
                 }
@@ -90,6 +91,9 @@ class OKex {
                         let result = this.handleLimitOrderResult(pars,body.order_id)
                         resolve(result)
                     }else{
+                        console.log("***********************************")
+                        console.log(body)
+                        console.log("***********************************")
                         resolve(null)
                     }
 
@@ -197,6 +201,7 @@ class OKex {
             request(options, (error, response, body)=>{
                 try {
                     body = JSON.parse(body);
+                    console.log(body)
                     if(body.result){
                         let result = this.handleLimitOrderResult(pars,body.order_id)
                         resolve(result)

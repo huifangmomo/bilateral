@@ -1,26 +1,26 @@
 'use strict';
-// const fs = require('fs');
-// const B = require("./class/huobi");
-// const A = require("./class/okex");
-// const DB = require('./db');
-// let db = new DB();
-//
-// const config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
-//
-// const a = new A(null, config.A.AccessID, config.A.SecretKey,"5720120");
-// const b = new B(null, config.B.AccessID, config.B.SecretKey,"5720120");
-//
-// async function getInfo(){
-//     let A_B = await a.getOrderInfo({
-//         market: 'NEOBTC',
-//         id:2980963410
-//     })
-//
-//     console.log(A_B)
-//
-// }
-//
-// getInfo();
+const fs = require('fs');
+const B = require("./class/huobi");
+const A = require("./class/okex");
+const DB = require('./class/db');
+let db = new DB();
+
+const config = JSON.parse(fs.readFileSync(__dirname + '/config/config.json'));
+
+const a = new A(null, config.A.AccessID, config.A.SecretKey,"5720120");
+const b = new B(null, config.B.AccessID, config.B.SecretKey,"5720120");
+
+async function getInfo(){
+    let A_B = await b.getOrderInfo({
+        market: 'NEO/BTC',
+        id:22052184290
+    })
+
+    console.log(A_B)
+
+}
+
+getInfo();
 // console.log(huobi)
 // huobi.limitOrder({
 //     market: "NEO/BTC",

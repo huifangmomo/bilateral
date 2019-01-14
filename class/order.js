@@ -168,27 +168,9 @@ class Order {
                 }
 
                 if(this.orderList[0].status === 1){
-                    let differ = 0;
-                    let depthIndex = 0;
-                    let point = this.config.orderOptions[this.orderList[0].arguments.market+"Point"];
-                    let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
-                    if(this.orderList[0].arguments.type === 'buy'){
-                        if(this.orderList[0].arguments.market === 'A'){
-                            differ = this.floatCompute(this.orderList[0].info.price,Object.keys(A_Depth.bids[0])[0],depthFix);
-                            depthIndex = this.depthCompute(A_Depth.bids,this.orderList[0].info.price);
-                        }else{
-                            differ = this.floatCompute(this.orderList[0].info.price,Object.keys(B_Depth.bids[0])[0],depthFix);
-                            depthIndex = this.depthCompute(B_Depth.bids,this.orderList[0].info.price);
-                        }
-                    }else{
-                        if(this.orderList[0].arguments.market === 'A'){
-                            differ = this.floatCompute(this.orderList[0].info.price,Object.keys(A_Depth.asks[0])[0],depthFix);
-                            depthIndex = this.depthCompute(A_Depth.asks,this.orderList[0].info.price);
-                        }else{
-                            differ = this.floatCompute(this.orderList[0].info.price,Object.keys(B_Depth.asks[0])[0],depthFix);
-                            depthIndex = this.depthCompute(B_Depth.asks,this.orderList[0].info.price);
-                        }
-                    }
+                    let priceStatus = this.getPriceStatus(this.orderList[0].arguments,this.orderList[0].info.price,A_Depth,B_Depth);
+                    let differ = priceStatus.differ;
+                    let depthIndex = priceStatus.depthIndex;
 
 
                     this.log.info("订单一精度差"+differ);
@@ -276,27 +258,9 @@ class Order {
 
                 this.log.info("订单二状态"+this.orderList[1].status);
                 if (this.orderList[1].status === 1) {
-                    let differ = 0;
-                    let depthIndex = 0;
-                    let point = this.config.orderOptions[this.orderList[1].arguments.market+"Point"];
-                    let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
-                    if (this.orderList[1].arguments.type === 'buy') {
-                        if (this.orderList[1].arguments.market === 'A') {
-                            differ = this.floatCompute(this.orderList[1].info.price,Object.keys(A_Depth.bids[0])[0],depthFix);
-                            depthIndex = this.depthCompute(A_Depth.bids,this.orderList[1].info.price);
-                        } else {
-                            differ = this.floatCompute(this.orderList[1].info.price,Object.keys(B_Depth.bids[0])[0],depthFix);
-                            depthIndex = this.depthCompute(B_Depth.bids,this.orderList[1].info.price);
-                        }
-                    } else {
-                        if (this.orderList[1].arguments.market === 'A') {
-                            differ = this.floatCompute(this.orderList[1].info.price,Object.keys(A_Depth.asks[0])[0],depthFix);
-                            depthIndex = this.depthCompute(A_Depth.asks,this.orderList[1].info.price);
-                        } else {
-                            differ = this.floatCompute(this.orderList[1].info.price,Object.keys(B_Depth.asks[0])[0],depthFix);
-                            depthIndex = this.depthCompute(B_Depth.asks,this.orderList[1].info.price);
-                        }
-                    }
+                    let priceStatus = this.getPriceStatus(this.orderList[1].arguments,this.orderList[1].info.price,A_Depth,B_Depth);
+                    let differ = priceStatus.differ;
+                    let depthIndex = priceStatus.depthIndex;
 
                     this.log.info("订单二精度差"+differ);
                     this.log.info("订单二深度"+depthIndex);
@@ -403,6 +367,31 @@ class Order {
         this.log.info(price);
         this.log.info(depth);
         return 11;
+    }
+
+    getPriceStatus(args,price,A_Depth,B_Depth){
+        let differ = 0;
+        let depthIndex = 0;
+        let point = this.config.orderOptions[args.market+"Point"];
+        let depthFix = parseFloat(Math.pow(0.1,point).toFixed(point));
+        if (args.type === 'buy') {
+            if (args.market === 'A') {
+                differ = this.floatCompute(price,Object.keys(A_Depth.bids[0])[0],depthFix);
+                depthIndex = this.depthCompute(A_Depth.bids,price);
+            } else {
+                differ = this.floatCompute(price,Object.keys(B_Depth.bids[0])[0],depthFix);
+                depthIndex = this.depthCompute(B_Depth.bids,price);
+            }
+        } else {
+            if (args.market === 'A') {
+                differ = this.floatCompute(price,Object.keys(A_Depth.asks[0])[0],depthFix);
+                depthIndex = this.depthCompute(A_Depth.asks,price);
+            } else {
+                differ = this.floatCompute(price,Object.keys(B_Depth.asks[0])[0],depthFix);
+                depthIndex = this.depthCompute(B_Depth.asks,price);
+            }
+        }
+        return {differ:differ,depthIndex:depthIndex}
     }
 
     priceCompute(A_Depth,B_Depth,data){  //type ,price, market, num
@@ -616,12 +605,12 @@ class Order {
                 if(parseInt(orderInfo.id)===parseInt(this.orderList[0].info.id)){
                     if((parseInt(orderStatus)===2 ||(parseInt(orderStatus)===3 && orderInfo.deal_money!=='0'))){
                     	if(this.orderList[0].isInsert==true){
-                    		
+
                     	}else{
                     		db.insertOrgin({id:this.bilaterId,marketKey:this.key,orderA:''+orderInfo.id,amount:orderInfo.amount});
                     		this.orderList[0].isInsert=true;
                     	}
-                        
+
                         if(parseInt(orderInfo.side)==1){
                             db.updateSellPrice({id:this.bilaterId,sellPrice:''+orderInfo.price});
                         }else{
@@ -629,13 +618,17 @@ class Order {
                         }
                     }
                     if(parseInt(orderStatus)===3 && orderInfo.deal_money!=='0'){
+                        let sellPrice = ''+orderInfo.price;
                         if(parseInt(orderInfo.side)==1){ //卖
                             this.balances[this.orderList[0].arguments.market][0] -= this.config.orderOptions.amount;
                             this.balances[this.orderList[0].arguments.market][1] += parseFloat(''+orderInfo.deal_money);
                         }else{//买
                             this.balances[this.orderList[0].arguments.market][0] += this.config.orderOptions.amount;
                             this.balances[this.orderList[0].arguments.market][1] -= parseFloat(''+orderInfo.deal_money);
+                            sellPrice = ''+this.orderList[1].arguments.price;
                         }
+                        let charge = this.config.orderOptions.amount*parseFloat(sellPrice)*this.config.orderOptions['fee'+this.orderList[0].arguments.market];
+                        db.updateCharge({id:''+this.bilaterId,charge:charge});
                         db.saveDeal({orderId:''+orderInfo.id,
                             market:this.config[this.orderList[0].arguments.market].name,
                             marketKey:this.key,
@@ -676,7 +669,9 @@ class Order {
                         let profitData = this.profitCompute(buyPrice,sellPrice,parseFloat(orderInfo.amount));
                         let profit = profitData.profit;
                         let charge = profitData.charge;
-                        db.saveBilateral({id:this.bilaterId,orderB:''+orderInfo.id,profit:profit,charge:charge});
+                        db.saveBilateral({id:this.bilaterId,orderB:''+orderInfo.id,profit:profit});
+                        db.updateCharge({id:this.bilaterId,charge:charge})
+                        db.updateStatus({id:this.bilaterId,orderStatus:1});
                         if(parseInt(orderInfo.side)==1){
                             db.updateSellPrice({id:this.bilaterId,sellPrice:''+orderInfo.price});
                         }else{
@@ -692,7 +687,7 @@ class Order {
                     }
                 }
             }
-            
+
             let order = this.ordersMap.get(parseInt(orderInfo.id));
                 if (order) {
                     // this.orderList[1].status = parseInt(order.status) ;
@@ -769,7 +764,8 @@ class Order {
                             this.balances[this.orderList[1].arguments.market][1] -= this.config.orderOptions.amount*parseFloat(price);
                         }
                         this.log.http({arguments:this.orderList[1].arguments,msg:"订单二发送成功，结束自动"+this.orderList[1].info.id});
-                        db.saveBilateral({id:this.bilaterId,orderB:''+this.orderList[1].info.id,profit:-1,charge:-1});
+                        db.saveBilateral({id:this.bilaterId,orderB:''+this.orderList[1].info.id,profit:0});
+                        db.updateStatus({id:this.bilaterId,orderStatus:2});
                         this.status = "bilateralEnd";
                         this.event.emit('woker_end',this.index,2);
                     }else{
