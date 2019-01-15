@@ -107,7 +107,8 @@ class Huobi {
             if (method == 'GET') {
                 http.get(url, {
                     timeout: 1000,
-                    headers: headers
+                    headers: headers,
+                    proxy:this.proxy
                 }).then(data => {
                     let json = JSON.parse(data);
                     // console.log("================================")
@@ -127,7 +128,8 @@ class Huobi {
             } else if (method == 'POST') {
                 http.post(url, body, {
                     timeout: 1000,
-                    headers: headers
+                    headers: headers,
+                    proxy:this.proxy
                 }).then(data => {
                     let json = JSON.parse(data);
                     if (json.status == 'ok') {
@@ -176,18 +178,17 @@ class Huobi {
         data.left=parseFloat(data.amount)-parseFloat(data.deal_amount)
         data.market=params.symbol.toUpperCase()
         data.price = params.price
-        if(params.state=='submitting'){
-            data.status = params.status
-        }else if(params.state=='submitted'){
-            data.status = params.status
+        data.state = params.state
+        if(params.state=='submitted'){
+            data.status = 'not_deal'
         }else if(params.state=='partial-filled'){
             data.status = 'part_deal'
         }else if(params.state=='partial-canceled'){
-            data.status = 'part_deal'
+            data.status = 'done'
         }else if(params.state=='filled'){
             data.status = 'done'
         }else if(params.state=='canceled'){
-            data.status = 'canceled'
+            data.status = 'done'
         }
         if(params.type=='buy-market'||params.type=='buy-limit'||params.type=='buy-ioc'){
             data.type = 'buy'

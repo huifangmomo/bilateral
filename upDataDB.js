@@ -29,13 +29,26 @@ class UpdataDB {
     }
 
     upDataUnknow() {
-        this.connection.query("SELECT * FROM tbl_bilateral where orderStatus = 0 or orderStatus = 2 or orderStatus = 3;", (err, data)=>{ //还没有收益的订单
+        this.connection.query("SELECT * FROM tbl_bilateral where orderStatus = 0 or orderStatus = 2;", (err, data)=>{ //还没有收益的订单
             if(err)
                 console.log('出错了', err);
             else{
                 console.log('成功了');
                 console.log(data);
-                this.getOrdersInfo(data);
+                this.getOrdersInfo(data,0);
+            }
+
+        });
+    }
+
+    upDataHalf() {
+        this.connection.query("SELECT * FROM tbl_bilateral where orderStatus = 3;", (err, data)=>{ //还没有收益的订单
+            if(err)
+                console.log('出错了', err);
+            else{
+                console.log('成功了');
+                console.log(data);
+                this.getOrdersInfo(data,1);
             }
 
         });
@@ -137,7 +150,7 @@ class UpdataDB {
         }
     }
 
-    async getOrdersInfo(data){
+    async getOrdersInfo(data,type){
         for (let i=0; i<data.length;i++) {
             let buyPrice = 0;
             let sellPrice = 0;
@@ -145,6 +158,10 @@ class UpdataDB {
                 market: data[i].marketKey,
                 id:data[i].orderA
             });
+            console.log("***********************************"+i)
+            console.log(resultA);
+            console.log("startTime"+data[i].startTime);
+            console.log("***********************************")
             if(!!resultA){
                 if(!!resultA.data){
                     resultA = resultA.data;
@@ -162,11 +179,14 @@ class UpdataDB {
                     market: data[i].marketKey,
                     id:data[i].orderB
                 });
+                console.log("================================"+i)
+                console.log(resultB);
+                console.log("startTime"+data[i].startTime);
+                console.log("================================")
                 if(!!resultB){//订单B有结果
                     if(!!resultB.data){
                         resultB = resultB.data;
                     }
-                    console.log(resultB.state);
                     if((resultB.type).split('-')[0]=='buy'){
                         buyPrice = resultB.price;
                     }
@@ -176,30 +196,69 @@ class UpdataDB {
                     db.updateBuyPrice({id:data[i].id,buyPrice:''+buyPrice});
                     db.updateSellPrice({id:data[i].id,sellPrice:''+sellPrice});
                     if(resultB.status == "done"){
-                        let value = (this.profitCompute(buyPrice,sellPrice,parseFloat(data[i].amount)));
+                        let value = (this.profitCompute(buyPrice,sellPrice,parseFloat(''+resultB.deal_money)));
                         db.saveBilateral({id:data[i].id,orderB:''+resultB.id,profit:value.profit});
-                        db.updateCharge({id:data[i].id,charge:value.charge});
-                        db.saveDeal({orderId:''+resultB.id,
-                            market:'huobi',
-                            marketKey:data[i].marketKey,
-                            orderType:(resultB.type).split('-')[0],
-                            price:''+resultB.price,
-                            bilateralId:data[i].id,
-                            amount:data[i].amount});
-                        db.updateStatus({id:data[i].id,orderStatus:1})
+                        let addFee = parseFloat(''+data[i].amount)*parseFloat(''+sellPrice)*config.orderOptions.feeA+
+                            parseFloat(''+resultB.deal_amount)*parseFloat(''+sellPrice)*config.orderOptions.feeB;
+                        db.updateCharge({id:data[i].id,charge:addFee});
+                        if(type==0){
+                            db.saveDeal({orderId:''+resultB.id,
+                                market:'huobi',
+                                marketKey:data[i].marketKey,
+                                orderType:(resultB.type).split('-')[0],
+                                price:''+resultB.price,
+                                bilateralId:data[i].id,
+                                amount:data[i].amount});
+                        }
+
+                        if(parseFloat(''+resultB.deal_money)==0){  //被取消 需要补单
+                            db.updateStatus({id:data[i].id,orderStatus:-1});
+                        }else if(parseFloat(''+resultB.deal_money)==parseFloat(''+data[i].amount)){  //完全成交
+                            db.updateStatus({id:data[i].id,orderStatus:1});
+                        }else { //成交部分被取消  ,需要补单
+                            db.updateStatus({id:data[i].id,orderStatus:-1});
+                        }
                     }
 
-                    if(resultB.status == "canceled") {
+                    if(resultB.status == "part_deal") { //成交部分 正挂着
+                        db.updateCharge({id:data[i].id,charge:parseFloat(data[i].amount)*parseFloat(''+sellPrice)*config.orderOptions.feeA});
                         db.updateProfit({id:data[i].id,profit:0});
-                        db.updateStatus({id:data[i].id,orderStatus:-1});
+                        db.updateStatus({id:data[i].id,orderStatus:3});
                     }
                 }else{ //订单B没查到
-                    db.updateStatus({id:data[i].id,orderStatus:0});
-                    db.updateProfit({id:data[i].id,profit:0});
+                    if(new Date().getTime() - data[i].startTime.getTime()>60*1000 && resultA.status == 'done'){  //第一单完成（完成成交或者部分成交被取消或者被取消）
+                        let price = sellPrice;
+                        if(sellPrice==0){
+                            price = buyPrice+0.000001
+                        }
+                        db.updateCharge({id:data[i].id,charge:parseFloat(''+resultA.deal_amount)*parseFloat(''+price)*config.orderOptions.feeA});
+                        db.updateStatus({id:data[i].id,orderStatus:-1});
+                        db.updateProfit({id:data[i].id,profit:0});
+                    }
                 }
             }else{//没有订单B
-                db.updateStatus({id:data[i].id,orderStatus:0});
-                db.updateProfit({id:data[i].id,profit:0});
+                if(!!resultA){
+                    if(new Date().getTime() - data[i].startTime.getTime()>60*1000 && resultA.status == 'done'){  //第一单完成（完成成交或者部分成交被取消或者被取消）
+                        let price = sellPrice;
+                        if(sellPrice==0){
+                            price = buyPrice+0.000001
+                        }
+                        db.updateCharge({id:data[i].id,charge:parseFloat(''+resultA.deal_amount)*parseFloat(''+price)*config.orderOptions.feeA});
+                        db.updateStatus({id:data[i].id,orderStatus:-1});
+                        db.updateProfit({id:data[i].id,profit:0});
+                    }else { //订单还挂着呢
+                        db.updateStatus({id:data[i].id,orderStatus:-1});
+                        db.updateProfit({id:data[i].id,profit:0});
+                    }
+                }else{
+                    let price = data[i].sellPrice;
+                    if(sellPrice==0){
+                        price = data[i].buyPrice+0.000001
+                    }
+                    db.updateCharge({id:data[i].id,charge:parseFloat(''+data[i].amount)*parseFloat(''+price)*config.orderOptions.feeA});
+                    db.updateStatus({id:data[i].id,orderStatus:-1});
+                    db.updateProfit({id:data[i].id,profit:0});
+                }
             }
         }
     }

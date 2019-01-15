@@ -34,13 +34,18 @@ class OKex {
                 },
                 body: data
             };
-            if (!!self.proxy) {
-                options.proxy = self.proxy
+
+            if (!!this.proxy) {
+                options.proxy = this.proxy
             }
+            // console.log("***********************************")
+            // console.log(options.proxy)
+            // console.log("***********************************")
             request(options, (error, response, body)=>{
+                console.log(error)
+
                 try {
                     body = JSON.parse(body);
-
                     if(body.result&&parseInt(body.orders.length)>0){
                         let result = this.handleOrderInfo(body.orders[0])
                         resolve(result)
@@ -81,8 +86,8 @@ class OKex {
                 },
                 body: data
             };
-            if (!!self.proxy) {
-                options.proxy = self.proxy
+            if (!!this.proxy) {
+                options.proxy = this.proxy
             }
             request(options, (error, response, body)=>{
                 try {
@@ -91,9 +96,9 @@ class OKex {
                         let result = this.handleLimitOrderResult(pars,body.order_id)
                         resolve(result)
                     }else{
-                        console.log("***********************************")
-                        console.log(body)
-                        console.log("***********************************")
+                        // console.log("***********************************")
+                        // console.log(body)
+                        // console.log("***********************************")
                         resolve(null)
                     }
 
@@ -118,20 +123,15 @@ class OKex {
         data.left=parseFloat(params.amount)-parseFloat(params.deal_amount)
         data.market=params.symbol.split('_')[0].toUpperCase()+params.symbol.split('_')[1].toUpperCase()
         data.price = params.price
+        data.state = params.status
         if(parseInt(params.status)==-1){
-            data.status = 'cancelled'
+            data.status = 'done'
         }else if(parseInt(params.status)==0){
             data.status = 'not_deal'
         }else if(parseInt(params.status)==1){
             data.status = 'part_deal'
         }else if(parseInt(params.status)==2){
             data.status = 'done'
-        }else if(parseInt(params.status)==3){
-            data.status = 'cancelling'
-        }else if(parseInt(params.status)==4){
-            data.status = 'sendFail'
-        }else if(parseInt(params.status)==5){
-            data.status = 'sending'
         }
         data.type = params.type
         result.data=data
@@ -201,7 +201,7 @@ class OKex {
             request(options, (error, response, body)=>{
                 try {
                     body = JSON.parse(body);
-                    console.log(body)
+                    //console.log(body)
                     if(body.result){
                         let result = this.handleLimitOrderResult(pars,body.order_id)
                         resolve(result)

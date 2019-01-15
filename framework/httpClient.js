@@ -23,6 +23,9 @@ exports.get = function(url, options) {
             proxy: options.proxy || '',
             agentOptions: agentOptions
         }
+        if (!!options.proxy) {
+            httpOptions.proxy = options.proxy
+        }
         request.get(httpOptions, function(err, res, body) {
             if (err) {
                 reject(err);
@@ -50,6 +53,9 @@ exports.post = function(url, postdata, options) {
             proxy: options.proxy || '',
             agentOptions: agentOptions
         };
+        if (!!options.proxy) {
+            httpOptions.proxy = options.proxy
+        }
         request(httpOptions, function(err, res, body) {
             if (err) {
                 reject(err);
